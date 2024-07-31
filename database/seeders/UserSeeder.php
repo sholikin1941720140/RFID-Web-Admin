@@ -37,9 +37,9 @@ class UserSeeder extends Seeder
                 'role' => 'mahasiswa',
                 'uid' => '5F73572B',
                 'nomor' => '1941720240',
-                'username' => 'reyhan',
-                'name' => 'Reyhan',
-                'email' => 'reyhan123@gmail.com',
+                'username' => 'ngabdul',
+                'name' => 'Ngabdul',
+                'email' => 'ngabdul123@gmail.com',
                 'password' => Hash::make('password')
             ]
         ]);
