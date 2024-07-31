@@ -16,7 +16,9 @@ class LoginController extends Controller
 
     public function dashboard()
     {
-        return view('dashboard.dashboard');
+        $dsn = DB::table('users')->where('role', 'dosen')->count();
+        $mhs = DB::table('users')->where('role', 'mahasiswa')->count();
+        return view('dashboard.dashboard', compact('dsn', 'mhs'));
     }
 
     public function loginUser(Request $request)

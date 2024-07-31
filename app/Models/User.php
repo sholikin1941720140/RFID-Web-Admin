@@ -19,6 +19,8 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'role',
+        'uid',
+        'nomor',
         'name',
         'email',
         'password',
@@ -43,4 +45,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'user_id', 'id');
+    }
 }

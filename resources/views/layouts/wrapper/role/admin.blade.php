@@ -1,7 +1,7 @@
 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" 
    data-accordion="false">
-   {{-- <li class="nav-item">
-      <a href="{{url('dashboard')}}" 
+   <li class="nav-item">
+      <a href="{{url('/dashboard')}}"
          class="nav-link {{Request::segment(1) == 'dashboard' ? 'active' : ''}}">
          <i class="fas fa-home"></i>
          <p> &nbsp;
@@ -10,6 +10,15 @@
       </a>
    </li>
    <li class="nav-item">
+      <a href="{{url('/absensi')}}"
+         class="nav-link {{Request::segment(1) == 'dashboard' ? 'active' : ''}}">
+         <i class="fas fa-home"></i>
+         <p> &nbsp;
+            Absensi
+         </p>
+      </a>
+   </li>
+   {{-- <li class="nav-item">
       <a href="#" class="nav-link">
          <i class="nav-icon fas fa-cash-register"></i>
          <p>
@@ -282,5 +291,5 @@
          </li>
       </ul>
    </li> --}}
-   <h2>Admin</h2>
+   {{-- <h2>Admin</h2> --}}
 </ul>

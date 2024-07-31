@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SIMAS - Pakisaji | {{ucwords(strtolower(Request::segment(1)))}} {{ucwords(strtolower(Request::segment(2)))}}</title>
-    <link rel="icon" type="image/x-icon" href="{{url('dist/img/kab-malang.png')}}">
+    <title>SIMA - Polinema | {{ucwords(strtolower(Request::segment(1)))}} {{ucwords(strtolower(Request::segment(2)))}}</title>
+    <link rel="icon" type="image/x-icon" href="{{url('dist/img/polinema.png')}}">
     @include('layouts.custom.custom-css')
     @yield('custom-css')
 </head>
