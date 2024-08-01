@@ -20,7 +20,7 @@ class RfidController extends Controller
 
         $user = User::where('uid', $uid)->first();
         if (!$user) {
-            return response()->json(['status' => 'error', 'message' => 'Tidak ada user dengan UID tersebut'], 404);
+            return response()->json(['status' => 'error', 'message' => 'Kartu belum terdaftar'], 404);
         }
 
         $nama = $user->name;
