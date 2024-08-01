@@ -52,8 +52,9 @@
                     <thead>
                     <tr>
                         <th>No</th>
+                        <th>UID</th>
                         <th>Nama</th>
-                        <th>Jabatan</th>
+                        <th>Role</th>
                         <th>NIM</th>
                         <th>Tanggal Absen</th>
                         {{-- <th>Aksi</th> --}}
@@ -62,6 +63,7 @@
                     @foreach($data as $key => $item)
                     <tr>
                         <td>{{$key+1}}</td>
+                        <td>{{$item->user->uid}}</td>
                         <td>{{$item->user->name}}</td>
                         <td>{{$item->user->role}}</td>
                         <td>{{$item->user->nomor}}</td>

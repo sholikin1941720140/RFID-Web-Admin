@@ -9,7 +9,7 @@ class AttendanceController extends Controller
 {
     public function index()
     {
-        $data = Attendance::all();
+        $data = Attendance::orderBy('created_at', 'desc')->get();
 
         return view('dashboard.absensi.index', compact('data'));
     }
