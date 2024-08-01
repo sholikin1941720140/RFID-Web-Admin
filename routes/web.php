@@ -3,7 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\RfidController;
-use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\DataMaster\RuanganController;
+use App\Http\Controllers\DataMaster\KelasController;
+use App\Http\Controllers\DataMaster\MataKuliahController;
+use App\Http\Controllers\JadwalMengajarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +27,19 @@ Route::get('/rfid-data', [RfidController::class, 'store']);
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [LoginController::class, 'dashboard']);
 
-    Route::get('/absensi', [AttendanceController::class, 'index']);
+    //data master
+    Route::get('/data-master/ruangan', [RuanganController::class, 'index']);
+    Route::get('/data-master/kelas', [KelasController::class, 'index']);
+    Route::get('/data-master/matkul', [MataKuliahController::class, 'index']);
 
+    //data jadwal
+    Route::get('/jadwal/jadwal-mengajar', [JadwalMengajarController::class, 'index']);
+    Route::get('/jadwal/jadwal-mengajar/create', [JadwalMengajarController::class, 'create']);
+    Route::post('/jadwal/jadwal-mengajar/store', [JadwalMengajarController::class, 'store']);
+    Route::get('/jadwal/jadwal-mengajar/edit/{id}', [JadwalMengajarController::class, 'edit']);
+    Route::post('/jadwal/jadwal-mengajar/update/{id}', [JadwalMengajarController::class, 'update']);
+    Route::get('/jadwal/jadwal-mengajar/delete/{id}', [JadwalMengajarController::class, 'delete']);
+
+    Route::get('/absensi', [AbsensiController::class, 'index']);
     Route::get('/logout', [LoginController::class, 'logout']);
 });

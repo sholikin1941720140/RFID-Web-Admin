@@ -14,50 +14,89 @@
          class="nav-link {{Request::segment(1) == 'dashboard' ? 'active' : ''}}">
          <i class="fas fa-home"></i>
          <p> &nbsp;
-            Absensi
+            Absensi Dosen
          </p>
       </a>
    </li>
-   {{-- <li class="nav-item">
+   <li class="nav-item">
       <a href="#" class="nav-link">
          <i class="nav-icon fas fa-cash-register"></i>
          <p>
-            Penjualan
+            Data Master
             <i class="fas fa-angle-left right"></i>
          </p>
       </a>
       <ul class="nav nav-treeview"
          style="display: {{Request::segment(1) == 'penjualan' ? 'block' : ''}};padding-left: 10%;">
          <li class="nav-item">
-            <a href="{{url('/penjualan/kasir-beli')}}" 
+            <a href="{{url('/data-master/ruangan')}}" 
                class="nav-link {{Request::segment(2) == 'kasir-beli' ? 'active' : ''}}">
                <i class="fas fa-money-bill-wave-alt"></i>
                <p> &nbsp;
-                  Kasir
+                  Ruangan
                </p>
             </a>
          </li>
          <li class="nav-item">
-            <a href="{{url('penjualan/transaksi')}}" 
+            <a href="{{url('/data-master/matkul')}}" 
                class="nav-link {{Request::segment(2) == 'transaksi' ? 'active' : ''}}">
                <i class="fas fa-exchange-alt"></i>
                <p> &nbsp;
-                  Data Transaksi
+                  Mata Kuliah
                </p>
             </a>
          </li>
          <li class="nav-item">
-            <a href="{{url('penjualan/pelanggan')}}" 
+            <a href="{{url('/data-master/kelas')}}" 
                class="nav-link {{Request::segment(2) == 'pelanggan' ? 'active' : ''}}">
                <i class="fas fa-users"></i>
                <p> &nbsp;
-                  Pelanggan
+                  Kelas
                </p>
             </a>
          </li>
       </ul>
    </li>
    <li class="nav-item">
+      <a href="#" class="nav-link">
+         <i class="nav-icon  fas fa-check"></i>
+         <p>
+            Data Jadwal
+            <i class="fas fa-angle-left right"></i>
+         </p>
+      </a>
+      <ul class="nav nav-treeview"
+         style="display: {{Request::segment(1) == 'penjualan' ? 'block' : ''}};padding-left: 10%;">
+         <li class="nav-item">
+            <a href="{{url('/jadwal/jadwal-mengajar')}}" 
+               class="nav-link {{Request::segment(2) == 'kasir-beli' ? 'active' : ''}}">
+               <i class="fas fa-money-bill-wave-alt"></i>
+               <p> &nbsp;
+                  Jadwal Dosen
+               </p>
+            </a>
+         </li>
+         <li class="nav-item">
+            <a href="{{url('/data-master/matkul')}}" 
+               class="nav-link {{Request::segment(2) == 'transaksi' ? 'active' : ''}}">
+               <i class="fas fa-exchange-alt"></i>
+               <p> &nbsp;
+                  Jadwal Mahasiswa
+               </p>
+            </a>
+         </li>
+         {{-- <li class="nav-item">
+            <a href="{{url('/data-master/kelas')}}" 
+               class="nav-link {{Request::segment(2) == 'pelanggan' ? 'active' : ''}}">
+               <i class="fas fa-users"></i>
+               <p> &nbsp;
+                  Kelas
+               </p>
+            </a>
+         </li> --}}
+      </ul>
+   </li>
+   {{-- <li class="nav-item">
       <a href="#" class="nav-link">
          <i class="nav-icon fas fa-money-check"></i>
          <p>

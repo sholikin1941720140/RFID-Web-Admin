@@ -5,18 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Attendance extends Model
+class Ruangan extends Model
 {
     use HasFactory;
 
-    protected $table = 'attendances';
+    protected $table = 'ruangans';
 
     protected $fillable = [
-        'user_id',
+        'nama',
+        'kode',
     ];
 
-    public function user()
+    public function jadwal_mengajar()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->hasMany(JadwalMengajar::class);
     }
 }
