@@ -12,7 +12,7 @@ class Absensi extends Model
     protected $table = 'absensis';
 
     protected $fillable = [
-        'jadwal_mahasiswa_id',
+        // 'jadwal_mahasiswa_id',
         'user_id',
         'jam_masuk',
         'jam_keluar',
@@ -20,10 +20,10 @@ class Absensi extends Model
     ];
 
     
-    public function jadwal_mahasiswa()
-    {
-        return $this->belongsTo(JadwalMahasiswa::class, 'jadwal_mahasiswa_id', 'id');
-    }
+    // public function jadwal_mahasiswa()
+    // {
+    //     return $this->belongsTo(JadwalMahasiswa::class, 'jadwal_mahasiswa_id', 'id');
+    // }
 
     public function user()
     {
