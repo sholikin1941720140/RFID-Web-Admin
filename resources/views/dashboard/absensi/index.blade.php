@@ -56,16 +56,17 @@
                                             <tr>
                                                 <td>{{ $mk }} - {{ $dosen }}</td>
                                                 @for ($i = 1; $i <= 13; $i++)
-                                                    @php
-                                                        $absen = collect($jadwal)->first(function ($item) use ($i) {
-                                                            $jamMulai = (int)explode(':', $item['jam_mulai'])[0];
-                                                            $jamSelesai = (int)explode(':', $item['jam_selesai'])[0];
-                                                            return $i >= $jamMulai && $i <= $jamSelesai && $item['status'];
-                                                        });
-                                                    @endphp
                                                     <td>
-                                                        @if ($absen)
-                                                            <i class="fas fa-check"></i>
+                                                        @if (isset($jadwal[$i]))
+                                                            @if ($jadwal[$i] != 'null')
+                                                                <span class="badge badge-success">Hadir</span>
+                                                            @elseif ($jadwal[$i] == 'null')
+                                                                <span class="badge badge-danger">Tidak Hadir</span>
+                                                            @else
+                                                                <span class="badge badge-warning">Belum Absen</span>
+                                                            @endif
+                                                        @else
+                                                            <span class="badge badge-warning">Belum Absen</span>
                                                         @endif
                                                     </td>
                                                 @endfor
@@ -73,7 +74,7 @@
                                         @endforeach
                                     @endforeach
                                 </tbody>
-                            </table>
+                            </table>                            
                         </div>
                         <!-- /.card-body -->
                     </div>

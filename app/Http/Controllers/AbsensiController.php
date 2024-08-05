@@ -12,7 +12,7 @@ class AbsensiController extends Controller
     public function index()
     {
         $currentDate = Carbon::now()->toDateString();
-
+    
         // Ambil data jadwal dan absensi
         $jadwal = DB::table('jadwal_mengajars as jm')
             ->join('jadwal_mengajar_items as jmi', 'jm.id', '=', 'jmi.jadwal_mengajar_id')
@@ -26,7 +26,8 @@ class AbsensiController extends Controller
             ->select('jm.id', 'us.name as dosen', 'mk.nama as mata_kuliah', 'ru.nama as ruangan', 'jmi.jam_mulai', 'jmi.jam_selesai', 'ab.status')
             ->orderBy('jm.id')
             ->get();
-    
+        // return response()->json($jadwal);
+
         // Susun data dalam format yang sesuai
         $data = [];
         foreach ($jadwal as $item) {
@@ -36,9 +37,9 @@ class AbsensiController extends Controller
                 'status' => $item->status
             ];
         }
-    
-        return response()->json($data);
+        // return response()->json($data);
 
         return view('dashboard.absensi.index', compact('data'));
     }
+    
 }
