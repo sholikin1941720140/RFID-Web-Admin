@@ -45,7 +45,7 @@
                                 <thead>
                                     <tr>
                                         <th>Mata Kuliah - Pengajar</th>
-                                        @for ($i = 1; $i <= 13; $i++)
+                                        @for ($i = 1; $i <= 12; $i++)
                                             <th>Jam Ke {{ $i }}</th>
                                         @endfor
                                     </tr>
@@ -55,26 +55,26 @@
                                         @foreach ($mataKuliah as $mk => $jadwal)
                                             <tr>
                                                 <td>{{ $mk }} - {{ $dosen }}</td>
-                                                @for ($i = 1; $i <= 13; $i++)
-                                                    <td>
-                                                        @if (isset($jadwal[$i]))
-                                                            @if ($jadwal[$i] != 'null')
-                                                                <span class="badge badge-success">Hadir</span>
-                                                            @elseif ($jadwal[$i] == 'null')
-                                                                <span class="badge badge-danger">Tidak Hadir</span>
-                                                            @else
-                                                                <span class="badge badge-warning">Belum Absen</span>
-                                                            @endif
+                                                @for ($i = 0; $i < 12; $i++)
+                                                <td>
+                                                    @isset($jadwal[$i])
+                                                        @if ($jadwal[$i]['status'] == '1')
+                                                            <span class="badge badge-success">Hadir</span>
+                                                        @elseif ($jadwal[$i]['status'] == '0')
+                                                            <span class="badge badge-danger">Tidak Hadir</span>
                                                         @else
                                                             <span class="badge badge-warning">Belum Absen</span>
                                                         @endif
-                                                    </td>
+                                                    @else
+                                                        <span class="badge badge-warning">Belum Absen</span>
+                                                    @endisset
+                                                </td>
                                                 @endfor
                                             </tr>
                                         @endforeach
                                     @endforeach
                                 </tbody>
-                            </table>                            
+                            </table>                                                                              
                         </div>
                         <!-- /.card-body -->
                     </div>
