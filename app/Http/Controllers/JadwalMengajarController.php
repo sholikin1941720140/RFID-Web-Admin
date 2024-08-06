@@ -65,4 +65,12 @@ class JadwalMengajarController extends Controller
 
         return redirect('/jadwal/jadwal-mengajar')->with('success', 'Data jadwal berhasil ditambahkan!');
     }
+
+    public function delete($id)
+    {
+        DB::table('jadwal_mengajars')->where('id', $id)->delete();
+        DB::table('jadwal_mengajar_items')->where('jadwal_mengajar_id', $id)->delete();
+
+        return redirect('/jadwal/jadwal-mengajar')->with('success', 'Data jadwal berhasil dihapus!');
+    }
 }

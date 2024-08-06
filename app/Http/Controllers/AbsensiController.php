@@ -16,7 +16,10 @@ class AbsensiController extends Controller
                         ->join('users as us', 'jm.dosen_id', '=', 'us.id')
                         ->join('mata_kuliahs as mk', 'jm.mata_kuliah_id', '=', 'mk.id')
                         ->join('ruangans as ru', 'jm.ruangan_id', '=', 'ru.id')
-                        ->leftJoin('absensis as ab', 'us.id', '=', 'ab.user_id')
+                        ->leftJoin('absensis as ab', function($join) {
+                            $join->on('jmi.id', '=', 'ab.jadwal_mengajar_item_id')
+                                ->on('us.id', '=', 'ab.user_id');
+                        })
                         ->select(
                             'jm.id', 
                             'us.name as dosen', 
@@ -36,6 +39,7 @@ class AbsensiController extends Controller
                         )
                         ->orderBy('jm.id')
                         ->get();
+
         // return response()->json($jadwal);
 
         $data = [];

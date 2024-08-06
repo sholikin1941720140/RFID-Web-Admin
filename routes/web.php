@@ -36,8 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/jadwal/jadwal-mengajar', [JadwalMengajarController::class, 'index']);
     Route::get('/jadwal/jadwal-mengajar/create', [JadwalMengajarController::class, 'create']);
     Route::post('/jadwal/jadwal-mengajar/store', [JadwalMengajarController::class, 'store']);
-    Route::get('/jadwal/jadwal-mengajar/edit/{id}', [JadwalMengajarController::class, 'edit']);
-    Route::post('/jadwal/jadwal-mengajar/update/{id}', [JadwalMengajarController::class, 'update']);
+    // Route::get('/jadwal/jadwal-mengajar/edit/{id}', [JadwalMengajarController::class, 'edit']);
+    // Route::post('/jadwal/jadwal-mengajar/update/{id}', [JadwalMengajarController::class, 'update']);
     Route::get('/jadwal/jadwal-mengajar/delete/{id}', [JadwalMengajarController::class, 'delete']);
 
     Route::get('/absensi', [AbsensiController::class, 'index']);

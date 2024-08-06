@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('absensis', function (Blueprint $table) {
             $table->id();
             // $table->unsignedBigInteger('jadwal_mahasiswa_id');
+            $table->unsignedBigInteger('jadwal_mengajar_item_id');
             $table->unsignedBigInteger('user_id');
             $table->time('jam_masuk')->nullable();
             $table->time('jam_keluar')->nullable();
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->timestamps();
 
             // $table->foreign('jadwal_mahasiswa_id')->references('id')->on('jadwal_mahasiswas')->onDelete('cascade');
+            $table->foreign('jadwal_mengajar_item_id')->references('id')->on('jadwal_mengajar_items')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

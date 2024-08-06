@@ -74,8 +74,8 @@
                                     @endforeach
                                 </td>
                                 {{-- <td>{{ \Carbon\Carbon::make($item->created_at)->format('d F Y H:i:s') }}</td> --}}
-                                {{-- <td>
-                                    <a class="btn btn-primary btn-sm" href="{{url('/kategori/edit/'.$item->id)}}">
+                                <td>
+                                    {{-- <a class="btn btn-primary btn-sm" href="{{url('/kategori/edit/'.$item->id)}}">
                                         <i class="fas fa-pencil-alt"></i> Edit
                                     </a> 
                                     &nbsp;
@@ -86,11 +86,11 @@
                                     <a class="btn btn-warning btn-sm" href="{{url('/arsip-surat/download/'.$item->id)}}">
                                         <i class="fas fa-download"></i> Download
                                     </a>
-                                    &nbsp;
-                                    <a class="btn btn-danger btn-sm ondelete" href="{{url('/kategori/delete/'.$item->id)}}"> 
+                                    &nbsp; --}}
+                                    <a class="btn btn-danger btn-sm ondelete" href="{{url('/jadwal/jadwal-mengajar/delete/'.$item['id'])}}"> 
                                         <i class="fas fa-trash"></i> Delete
                                     </a>
-                                </td> --}}
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
