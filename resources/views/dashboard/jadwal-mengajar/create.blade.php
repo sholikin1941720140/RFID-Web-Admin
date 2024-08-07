@@ -42,7 +42,7 @@
                                             <select class="form-control select2" name="matkul" required>
                                                 <option selected disabled>Pilih Mata Kuliah</option>
                                                 @foreach($matkul as $k)
-                                                    <option value="{{ $k->id }}">{{ $k->nama }} ({{ $k->kode }}) - Semester {{ $k->semester }}</option>
+                                                    <option value="{{ $k->id }}">{{ $k->nama }} ({{ $k->kode }})</option>
                                                 @endforeach
                                             </select>
                                         </div>

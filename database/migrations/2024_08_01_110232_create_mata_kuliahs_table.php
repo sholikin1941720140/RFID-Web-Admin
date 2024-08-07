@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('kode')->unique();
-            $table->integer('semester');
+            // $table->integer('semester');
             $table->timestamps();
         });
     }

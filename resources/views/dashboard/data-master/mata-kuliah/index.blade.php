@@ -54,7 +54,7 @@
                         <th>No</th>
                         <th>Nama</th>
                         <th>kode</th>
-                        <th>Semester</th>
+                        {{-- <th>Semester</th> --}}
                         {{-- <th>Aksi</th> --}}
                     </tr>
                     </thead>
@@ -63,7 +63,7 @@
                         <td>{{$key+1}}</td>
                         <td>{{$item->nama}}</td>
                         <td>{{$item->kode}}</td>
-                        <td>{{$item->semester}}</td>
+                        {{-- <td>{{$item->semester}}</td> --}}
                         {{-- <td>
                             <a class="btn btn-primary btn-sm" 
                                 href="{{url('/kategori/edit/'.$item->id)}}">

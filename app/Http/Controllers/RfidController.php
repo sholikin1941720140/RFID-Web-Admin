@@ -55,10 +55,11 @@ class RfidController extends Controller
                         ->select('jm.id as jadwal_mengajar_id', 'jmi.id as jadwal_mengajar_item_id', 'jmi.jam_mulai', 'jmi.jam_selesai')
                         ->first();
             
+            // Jika tidak ada jadwal maka mengirim pesan ini
             if (!$jadwal) {
                 return response()->json([
                     'status' => 'error', 
-                    'message' => 'Tidak ada jadwal mengajar saat ini atau di luar jam mengajar'
+                    'message' => 'Tidak ada jadwal'
                 ], 400);
             }
     
@@ -74,7 +75,7 @@ class RfidController extends Controller
             if ($absenSebelumnya) {
                 return response()->json([
                     'status' => 'error', 
-                    'message' => 'Anda sudah absen sebelumnya pada jadwal ini'
+                    'message' => 'Anda sudah absen sebelumnya'
                 ], 400);
             }
     
@@ -88,13 +89,12 @@ class RfidController extends Controller
             $absen->updated_at = $created_at;
             $absen->save();
     
-            // Pesan sukses untuk Arduino
+            // Pesan berhasil absen untuk Arduino
             return response()->json([
                 'status' => 'success', 
                 'message' => $nama . ' berhasil absen'
             ]);
         }
     }
-    
 }
 

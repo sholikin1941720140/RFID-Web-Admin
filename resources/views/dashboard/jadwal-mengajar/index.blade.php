@@ -56,7 +56,7 @@
                                 <th>Ruangan</th>
                                 <th>Dosen</th>
                                 <th>Detail</th>
-                                {{-- <th>Aksi</th> --}}
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -18,28 +18,28 @@ class MatkulSeeder extends Seeder
             [
                 'nama' => 'Pemrograman Web',
                 'kode' => 'PW',
-                'semester' => 4,
+                // 'semester' => 4,
                 'created_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
             ],
             [
                 'nama' => 'Pemrograman Mobile',
                 'kode' => 'PM',
-                'semester' => 4,
+                // 'semester' => 4,
                 'created_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
             ],
             [
                 'nama' => 'Pemrograman Desktop',
                 'kode' => 'PD',
-                'semester' => 4,
+                // 'semester' => 4,
                 'created_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
             ],
             [
                 'nama' => 'Pemrograman Jaringan',
                 'kode' => 'PJ',
-                'semester' => 4,
+                // 'semester' => 4,
                 'created_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
             ]
