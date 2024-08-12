@@ -34,7 +34,7 @@
         <div class="container-fluid">
         <div class="row mb-2 d-flex justify-content-end mr-auto">
             <div class="ml-auto">
-            <a href="{{url('/jadwal/jadwal-mengajar/create')}}" class="btn btn-success">
+            <a href="{{url('/jadwal/jadwal-mahasiswa/create')}}" class="btn btn-success">
                 <i class="fas fa-plus"></i>
                 Tambah Data
             </a>

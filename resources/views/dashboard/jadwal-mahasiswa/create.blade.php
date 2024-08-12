@@ -16,7 +16,7 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-left">
                 <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                <li class="breadcrumb-item active">Tambah Data Jadwal Mengajar</li>
+                <li class="breadcrumb-item active">Tambah Data Jadwal Mahasiswa</li>
                 </ol>
             </div>
             </div>
@@ -31,11 +31,22 @@
                         <!-- general form elements -->
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">Tambah Data Jadwal Mengajar</h3>
+                                <h3 class="card-title">Tambah Data Jadwal Mahasiswa</h3>
                             </div>
-                            <form action="{{ url('/jadwal/jadwal-mengajar/store') }}" method="POST">
+                            <form action="{{ url('/jadwal/jadwal-mahasiswa/store') }}" method="POST">
                                 @csrf
                                 <div class="card-body">
+                                    <div class="form-group row">
+                                        <label for="mahasiswa" class="col-sm-2 col-form-label">Mahasiswa<span class="text-danger">*</span></label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control select2" name="mahasiswa" required>
+                                                <option selected disabled>Pilih Mahasiswa</option>
+                                                @foreach($mahasiswa as $m)
+                                                    <option value="{{ $m->id }}">{{ $m->nama }} - ({{ $m->nomor }})</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="form-group row">
                                         <label for="matkul" class="col-sm-2 col-form-label">Mata Kuliah<span class="text-danger">*</span></label>
                                         <div class="col-sm-10">

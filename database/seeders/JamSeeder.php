@@ -92,6 +92,13 @@ class JamSeeder extends Seeder
                 'created_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
             ],
+            [
+                'nama' => 'Jam ke-12',
+                'jam_mulai' => '17:10:00',
+                'jam_selesai' => '18:00:00',
+                'created_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+            ],
         ]);
     }
 }
