@@ -5,19 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ruangan extends Model
+class Jam extends Model
 {
     use HasFactory;
 
-    protected $table = 'ruangans';
+    protected $table = 'jams';
 
     protected $fillable = [
         'nama',
-        'kode',
+        'jam_mulai',
+        'jam_selesai',
     ];
 
-    public function jadwal_mengajar()
+    public function jadwal_mengajar_item()
     {
-        return $this->hasMany(JadwalMengajar::class);
+        return $this->hasMany(JadwalMengajarItem::class, 'jam_id', 'id');
     }
 }

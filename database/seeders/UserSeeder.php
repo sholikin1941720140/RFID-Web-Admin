@@ -29,8 +29,17 @@ class UserSeeder extends Seeder
                 'uid' => '73D41334',
                 'nomor' => '123456789',
                 'username' => 'dosen',
-                'name' => 'Ahmadi',
+                'name' => 'Ahmadi Yuli Ananta, ST., M.M.',
                 'email' => 'ahmadi@gmail.com',
+                'password' => Hash::make('password')
+            ],
+            [
+                'role' => 'dosen',
+                'uid' => null,
+                'nomor' => '123456788',
+                'username' => 'dosen',
+                'name' => 'Vivi Nur Wijayaningrum, S.Kom., M.Kom.',
+                'email' => 'vivi@gmail.com',
                 'password' => Hash::make('password')
             ],
             [

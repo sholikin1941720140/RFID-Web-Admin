@@ -14,7 +14,6 @@ class JadwalMengajar extends Model
     protected $fillable = [
         'dosen_id',
         'mata_kuliah_id',
-        'ruangan_id',
         'hari',
     ];
 
@@ -26,11 +25,6 @@ class JadwalMengajar extends Model
     public function mata_kuliah()
     {
         return $this->belongsTo(MataKuliah::class, 'mata_kuliah_id', 'id');
-    }
-
-    public function ruangan()
-    {
-        return $this->belongsTo(Ruangan::class, 'ruangan_id', 'id');
     }
 
     public function jadwal_mengajar_item()

@@ -14,7 +14,7 @@ class MataKuliah extends Model
     protected $fillable = [
         'nama',
         'kode',
-        // 'semester',
+        'tahun',
     ];
 
     public function jadwal_mengajar()

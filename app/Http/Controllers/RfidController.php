@@ -48,13 +48,15 @@ class RfidController extends Controller
             // Cek apakah dosen memiliki jadwal pada hari ini
             $jadwal = DB::table('jadwal_mengajars as jm')
                         ->join('jadwal_mengajar_items as jmi', 'jm.id', '=', 'jmi.jadwal_mengajar_id')
+                        ->join('jams as j', 'jmi.jam_id', '=', 'j.id')
                         ->where('jm.dosen_id', $user->id)
                         ->where('jm.hari', $currentDay)
-                        ->whereTime('jmi.jam_mulai', '<=', $currentTime)
-                        ->whereTime('jmi.jam_selesai', '>=', $currentTime)
-                        ->select('jm.id as jadwal_mengajar_id', 'jmi.id as jadwal_mengajar_item_id', 'jmi.jam_mulai', 'jmi.jam_selesai')
+                        ->whereTime('j.jam_mulai', '<=', $currentTime)
+                        ->whereTime('j.jam_selesai', '>=', $currentTime)
+                        ->select('jm.id as jadwal_mengajar_id', 'jmi.id as jadwal_mengajar_item_id', 'j.jam_mulai', 'j.jam_selesai')
                         ->first();
-            
+                        // return response()->json($jadwal);
+
             // Jika tidak ada jadwal maka mengirim pesan ini
             if (!$jadwal) {
                 return response()->json([
@@ -62,7 +64,7 @@ class RfidController extends Controller
                     'message' => 'Tidak ada jadwal'
                 ], 400);
             }
-    
+
             // Cek apakah dosen sudah pernah absen pada jadwal ini
             $absenSebelumnya = Absensi::where('user_id', $user->id)
                                     ->where('created_at', '>=', Carbon::now()->startOfDay())
@@ -71,14 +73,15 @@ class RfidController extends Controller
                                     ->whereTime('jam_masuk', '<=', $jadwal->jam_selesai)
                                     ->where('jadwal_mengajar_item_id', $jadwal->jadwal_mengajar_item_id)
                                     ->exists();
-    
+                                    // return response()->json($absenSebelumnya);
+
             if ($absenSebelumnya) {
                 return response()->json([
                     'status' => 'error', 
                     'message' => 'Anda sudah absen sebelumnya'
                 ], 400);
             }
-    
+
             // Simpan data absen
             $absen = new Absensi();
             $absen->user_id = $user->id;
@@ -88,11 +91,17 @@ class RfidController extends Controller
             $absen->created_at = $created_at;
             $absen->updated_at = $created_at;
             $absen->save();
-    
+
             // Pesan berhasil absen untuk Arduino
             return response()->json([
                 'status' => 'success', 
                 'message' => $nama . ' berhasil absen'
+            ]);
+        } elseif ($user->role == 'mahasiswa') {
+            $nama = $user->name;
+            return response()->json([
+                'status' => 'success', 
+                'message' => 'Mahasiswa ' . $nama
             ]);
         }
     }

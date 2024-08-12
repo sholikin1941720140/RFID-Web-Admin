@@ -16,33 +16,61 @@ class MatkulSeeder extends Seeder
     {
         DB::table('mata_kuliahs')->insert([
             [
-                'nama' => 'Pemrograman Web',
-                'kode' => 'PW',
-                // 'semester' => 4,
+                'nama' => 'Dasar Pemrograman',
+                'kode' => 'RTI221006',
+                'tahun' => 2024,
                 'created_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
             ],
             [
-                'nama' => 'Pemrograman Mobile',
-                'kode' => 'PM',
-                // 'semester' => 4,
+                'nama' => 'Matematika 1',
+                'kode' => 'RTI221004',
+                'tahun' => 2024,
                 'created_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
             ],
             [
-                'nama' => 'Pemrograman Desktop',
-                'kode' => 'PD',
-                // 'semester' => 4,
+                'nama' => 'Bahasa Inggris 1',
+                'kode' => 'RTI221005',
+                'tahun' => 2024,
                 'created_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
             ],
             [
-                'nama' => 'Pemrograman Jaringan',
-                'kode' => 'PJ',
-                // 'semester' => 4,
+                'nama' => 'Praktikum Dasar Pemrograman',
+                'kode' => 'RTI221007',
+                'tahun' => 2024,
                 'created_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
-            ]
+            ],
+            [
+                'nama' => 'Keselamatan dan Kesehatan Kerja',
+                'kode' => 'RTI221008',
+                'tahun' => 2024,
+                'created_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
+            ],
+            [
+                'nama' => 'Pancasila',
+                'kode' => 'RTI221001',
+                'tahun' => 2024,
+                'created_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
+            ],
+            [
+                'nama' => 'Critical Thinking dan Problem Solving',
+                'kode' => 'RTI221003',
+                'tahun' => 2024,
+                'created_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
+            ],
+            [
+                'nama' => 'Konsep Teknologi Informasi',
+                'kode' => 'RTI221002',
+                'tahun' => 2024,
+                'created_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s'),
+            ],
         ]);
     }
 }

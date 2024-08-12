@@ -13,13 +13,17 @@ class JadwalMengajarItem extends Model
 
     protected $fillable = [
         'jadwal_mengajar_id',
-        'jam_mulai',
-        'jam_selesai',
+        'jam_id'
     ];
 
     public function jadwal_mengajar()
     {
         return $this->belongsTo(JadwalMengajar::class, 'jadwal_mengajar_id', 'id');
+    }
+
+    public function jam()
+    {
+        return $this->belongsTo(Jam::class, 'jam_id', 'id');
     }
 
     public function absensi()

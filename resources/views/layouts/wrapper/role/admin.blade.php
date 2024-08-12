@@ -29,11 +29,11 @@
       <ul class="nav nav-treeview"
          style="display: {{Request::segment(1) == 'penjualan' ? 'block' : ''}};padding-left: 10%;">
          <li class="nav-item">
-            <a href="{{url('/data-master/ruangan')}}" 
+            <a href="{{url('/data-master/jam')}}" 
                class="nav-link {{Request::segment(2) == 'kasir-beli' ? 'active' : ''}}">
                <i class="fas fa-money-bill-wave-alt"></i>
                <p> &nbsp;
-                  Ruangan
+                  Jam
                </p>
             </a>
          </li>
@@ -77,7 +77,7 @@
             </a>
          </li>
          <li class="nav-item">
-            <a href="{{url('/data-master/matkul')}}" 
+            <a href="{{url('/jadwal/jadwal-mahasiswa')}}" 
                class="nav-link {{Request::segment(2) == 'transaksi' ? 'active' : ''}}">
                <i class="fas fa-exchange-alt"></i>
                <p> &nbsp;

@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('jadwal_mengajar_items', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('jadwal_mengajar_id');
-            $table->time('jam_mulai');
-            $table->time('jam_selesai');
+            $table->unsignedBigInteger('jam_id');
             $table->timestamps();
 
             $table->foreign('jadwal_mengajar_id')->references('id')->on('jadwal_mengajars')->onDelete('cascade');
+            $table->foreign('jam_id')->references('id')->on('jams')->onDelete('cascade');
         });
     }
 

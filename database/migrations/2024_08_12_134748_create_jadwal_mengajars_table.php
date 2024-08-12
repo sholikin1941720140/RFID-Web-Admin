@@ -15,13 +15,11 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('dosen_id');
             $table->unsignedBigInteger('mata_kuliah_id');
-            $table->unsignedBigInteger('ruangan_id');
             $table->string('hari');
             $table->timestamps();
 
             $table->foreign('dosen_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('mata_kuliah_id')->references('id')->on('mata_kuliahs')->onDelete('cascade');
-            $table->foreign('ruangan_id')->references('id')->on('ruangans')->onDelete('cascade');
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jadwal_mengajar');
+        Schema::dropIfExists('jadwal_mengajars');
     }
 };

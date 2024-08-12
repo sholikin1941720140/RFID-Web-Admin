@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('kelas_id')->nullable();
             $table->string('role');
             $table->string('uid')->nullable();
             $table->string('nomor')->nullable()->unique();
@@ -24,8 +23,6 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-
-            $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('set null');
         });
     }
 
