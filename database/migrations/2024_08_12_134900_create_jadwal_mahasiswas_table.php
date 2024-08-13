@@ -14,11 +14,9 @@ return new class extends Migration
         Schema::create('jadwal_mahasiswas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('mahasiswa_id');
-            $table->unsignedBigInteger('jadwal_mengajar_id');
             $table->timestamps();
 
             $table->foreign('mahasiswa_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('jadwal_mengajar_id')->references('id')->on('jadwal_mengajars')->onDelete('cascade');
         });
     }
 

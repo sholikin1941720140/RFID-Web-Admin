@@ -53,33 +53,33 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Mahasiswa</th>
-                                <th>Mata Kuliah</th>
-                                <th>Dosen</th>
-                                <th>Detail</th>
+                                <th>Detail Jadwal</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($data as $key => $item)
                             <tr>
-                                <td>{{$key+1}}</td>
-                                <td>{{$item['matkul']}} - {{$item['tahun']}}</td>
-                                <td>{{$item['kode']}}</td>
-                                <td>{{$item['dosen']}}</td>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $item->mahasiswa }}</td>
                                 <td>
-                                    <b>Hari : </b> {{$item['hari']}}
-                                    <br>
-                                    @foreach($item['jam'] as $index => $jam)
-                                        <b>Jam ke- {{$index + 1}} : </b> {{ $jam['jam_mulai'] }} - {{ $jam['jam_selesai'] }}<br>
+                                    @foreach($item->jadwal as $hari => $matkuls)
+                                        <b>Hari: {{ $hari }}</b><br>
+                                        @foreach($matkuls as $matkul => $details)
+                                            <b>{{ $matkul }}</b> - <i>{{ $details[0]['dosen'] }}</i><br>
+                                            @foreach($details as $index => $detail)
+                                                <b>{{ $detail['jam_nama'] }}: </b> {{ $detail['jam_mulai'] }} - {{ $detail['jam_selesai'] }}<br>
+                                            @endforeach
+                                            <br>
+                                        @endforeach
                                     @endforeach
                                 </td>
-                                {{-- <td>{{ \Carbon\Carbon::make($item->created_at)->format('d F Y H:i:s') }}</td> --}}
                                 <td>
-                                    <a class="btn btn-primary btn-sm" href="{{url('/jadwal/jadwal-mengajar/edit/'.$item['id'])}}">
+                                    <a class="btn btn-primary btn-sm" href="{{ url('/jadwal/jadwal-mahasiswa/edit/'.$item->id) }}">
                                         <i class="fas fa-pencil-alt"></i> Edit
                                     </a> 
                                     &nbsp;
-                                    <a class="btn btn-danger btn-sm ondelete" href="{{url('/jadwal/jadwal-mengajar/delete/'.$item['id'])}}"> 
+                                    <a class="btn btn-danger btn-sm ondelete" href="{{ url('/jadwal/jadwal-mahasiswa/delete/'.$item->id) }}">
                                         <i class="fas fa-trash"></i> Delete
                                     </a>
                                 </td>

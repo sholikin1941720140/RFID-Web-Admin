@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SIMA - Polinema | {{ucwords(strtolower(Request::segment(1)))}} {{ucwords(strtolower(Request::segment(2)))}}</title>
     <link rel="icon" type="image/x-icon" href="{{url('dist/img/polinema.png')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('layouts.custom.custom-css')
     @yield('custom-css')
 </head>

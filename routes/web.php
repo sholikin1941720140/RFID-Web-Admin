@@ -5,7 +5,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\RfidController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\DataMaster\JamController;
-use App\Http\Controllers\DataMaster\KelasController;
 use App\Http\Controllers\DataMaster\MataKuliahController;
 use App\Http\Controllers\JadwalMengajarController;
 use App\Http\Controllers\JadwalMahasiswaController;
@@ -34,9 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/data-master/jam/update/{id}', [JamController::class, 'update']);
     Route::get('/data-master/jam/delete/{id}', [JamController::class, 'delete']);
 
-    Route::get('/data-master/kelas', [KelasController::class, 'index']);
-    Route::get('/data-master/matkul', [MataKuliahController::class, 'index']);
-
     //data jadwal mengajar dosen
     Route::get('/jadwal/jadwal-mengajar', [JadwalMengajarController::class, 'index']);
     Route::get('/jadwal/jadwal-mengajar/create', [JadwalMengajarController::class, 'create']);
@@ -52,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/jadwal/jadwal-mahasiswa/edit/{id}', [JadwalMahasiswaController::class, 'edit']);
     Route::post('/jadwal/jadwal-mahasiswa/update/{id}', [JadwalMahasiswaController::class, 'update']);
     Route::get('/jadwal/jadwal-mahasiswa/delete/{id}', [JadwalMahasiswaController::class, 'delete']);
+    Route::post('/get-jadwal', [JadwalMahasiswaController::class, 'getJadwal']);
 
     Route::get('/absensi', [AbsensiController::class, 'index']);
     Route::get('/logout', [LoginController::class, 'logout']);

@@ -25,4 +25,9 @@ class JadwalMahasiswa extends Model
     {
         return $this->belongsTo(JadwalMengajar::class, 'jadwal_mengajar_id', 'id');
     }
+
+    public function jadwal_mahasiswa_item()
+    {
+        return $this->hasMany(JadwalMahasiswaItem::class, 'jadwal_mahasiswa_id', 'id');
+    }
 }

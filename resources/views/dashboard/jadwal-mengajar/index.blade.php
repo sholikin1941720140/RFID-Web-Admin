@@ -52,9 +52,9 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Dosen</th>
                                 <th>Mata Kuliah</th>
                                 <th>Kode Mata Kuliah</th>
-                                <th>Dosen</th>
                                 <th>Detail</th>
                                 <th>Aksi</th>
                             </tr>
@@ -63,14 +63,14 @@
                             @foreach($data as $key => $item)
                             <tr>
                                 <td>{{$key+1}}</td>
+                                <td>{{$item['dosen']}}</td>
                                 <td>{{$item['matkul']}} - {{$item['tahun']}}</td>
                                 <td>{{$item['kode']}}</td>
-                                <td>{{$item['dosen']}}</td>
                                 <td>
                                     <b>Hari : </b> {{$item['hari']}}
                                     <br>
                                     @foreach($item['jam'] as $index => $jam)
-                                        <b>Jam ke- {{$index + 1}} : </b> {{ $jam['jam_mulai'] }} - {{ $jam['jam_selesai'] }}<br>
+                                        <b>Jam ke- {{$jam['jam_id']}} : </b> {{ $jam['jam_mulai'] }} - {{ $jam['jam_selesai'] }}<br>
                                     @endforeach
                                 </td>
                                 {{-- <td>{{ \Carbon\Carbon::make($item->created_at)->format('d F Y H:i:s') }}</td> --}}

@@ -31,4 +31,9 @@ class JadwalMengajar extends Model
     {
         return $this->hasMany(JadwalMengajarItem::class, 'jadwal_mengajar_id', 'id');
     }
+
+    public function jadwal_mahasiswa_item()
+    {
+        return $this->hasMany(JadwalMahasiswaItem::class, 'jadwal_mengajar_id', 'id');
+    }
 }

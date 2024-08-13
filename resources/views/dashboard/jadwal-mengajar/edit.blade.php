@@ -38,17 +38,6 @@
                             <input type="hidden" name="jadwal_mengajar_id" value="{{$data['id']}}">
                             <div class="card-body">
                                 <div class="form-group row">
-                                    <label for="matkul" class="col-sm-2 col-form-label">Mata Kuliah<span class="text-danger">*</span></label>
-                                    <div class="col-sm-10">
-                                        <select class="form-control select2" name="matkul" required>
-                                            <option selected disabled>Pilih Mata Kuliah</option>
-                                            @foreach($matkul as $k)
-                                            <option value="{{ $k->id }}" {{ $data['mata_kuliah_id'] == $k->id ? 'selected' : '' }}>{{ $k->nama }} ({{ $k->kode }}) - {{ $k->tahun }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label for="dosen" class="col-sm-2 col-form-label">Dosen<span class="text-danger">*</span></label>
                                     <div class="col-sm-10">
                                         <select class="form-control select2" name="dosen" required>
@@ -59,6 +48,17 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label for="matkul" class="col-sm-2 col-form-label">Mata Kuliah<span class="text-danger">*</span></label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control select2" name="matkul" required>
+                                            <option selected disabled>Pilih Mata Kuliah</option>
+                                            @foreach($matkul as $k)
+                                            <option value="{{ $k->id }}" {{ $data['mata_kuliah_id'] == $k->id ? 'selected' : '' }}>{{ $k->nama }} ({{ $k->kode }}) - {{ $k->tahun }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>                                
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label">Jadwal<span class="text-danger">*</span></label>
                                     <div class="col-sm-10">

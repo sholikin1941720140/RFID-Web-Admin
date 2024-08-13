@@ -15,7 +15,7 @@ class JadwalMengajarController extends Controller
                     ->join('users as u', 'jm.dosen_id', '=', 'u.id')
                     ->join('mata_kuliahs as mk', 'jm.mata_kuliah_id', '=', 'mk.id')
                     ->select('jm.*', 'u.name as dosen', 'mk.nama as matkul', 'mk.kode', 'mk.tahun')
-                    ->orderBy('jm.created_at', 'DESC')
+                    ->orderBy('jm.created_at', 'ASC')
                     ->get();
                     // return response()->json($data);
         $data = json_decode(json_encode($data), true);
