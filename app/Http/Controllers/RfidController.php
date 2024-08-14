@@ -43,17 +43,16 @@ class RfidController extends Controller
         $currentTime = Carbon::now()->format('H:i:s');
         $currentDay = Carbon::now()->translatedFormat('l'); // Hari dalam format penuh, misalnya 'Monday'
     
-        // Cek apakah user adalah dosen
         if ($user->role == 'dosen') {
             // Cek apakah dosen memiliki jadwal pada hari ini
             $jadwal = DB::table('jadwal_mengajars as jm')
                         ->join('jadwal_mengajar_items as jmi', 'jm.id', '=', 'jmi.jadwal_mengajar_id')
                         ->join('jams as j', 'jmi.jam_id', '=', 'j.id')
-                        ->where('jm.dosen_id', $user->id)
                         ->where('jm.hari', $currentDay)
+                        ->where('jm.dosen_id', $user->id)
                         ->whereTime('j.jam_mulai', '<=', $currentTime)
                         ->whereTime('j.jam_selesai', '>=', $currentTime)
-                        ->select('jm.id as jadwal_mengajar_id', 'jmi.id as jadwal_mengajar_item_id', 'j.jam_mulai', 'j.jam_selesai')
+                        ->select('jm.id as jadwal_mengajar_id', 'j.jam_mulai', 'j.jam_selesai')
                         ->first();
                         // return response()->json($jadwal);
 
@@ -66,44 +65,128 @@ class RfidController extends Controller
             }
 
             // Cek apakah dosen sudah pernah absen pada jadwal ini
-            $absenSebelumnya = Absensi::where('user_id', $user->id)
-                                    ->where('created_at', '>=', Carbon::now()->startOfDay())
-                                    ->where('created_at', '<=', Carbon::now()->endOfDay())
-                                    ->whereTime('jam_masuk', '>=', $jadwal->jam_mulai)
-                                    ->whereTime('jam_masuk', '<=', $jadwal->jam_selesai)
-                                    ->where('jadwal_mengajar_item_id', $jadwal->jadwal_mengajar_item_id)
-                                    ->exists();
-                                    // return response()->json($absenSebelumnya);
+            $absen = DB::table('absensi_dosens')
+                        ->where('dosen_id', $user->id)
+                        ->where('jadwal_mengajar_id', $jadwal->jadwal_mengajar_id)
+                        ->whereDate('created_at', Carbon::now('Asia/Jakarta')->format('Y-m-d'))
+                        ->first();
 
-            if ($absenSebelumnya) {
+            if ($absen && $absen->jam_masuk && !$absen->jam_keluar) {
+                // Jika sudah absen masuk, lakukan absen keluar
+                DB::table('absensi_dosens')
+                    ->where('id', $absen->id)
+                    ->update(['jam_keluar' => $currentTime]);
+
+                return response()->json([
+                    'status' => 'success', 
+                    'message' => $nama . ' berhasil absen keluar'
+                ]);
+            } elseif ($absen && $absen->jam_masuk && $absen->jam_keluar) {
                 return response()->json([
                     'status' => 'error', 
-                    'message' => 'Anda sudah absen sebelumnya'
+                    'message' => 'Anda sudah absen keluar'
+                ], 400);
+            } else {
+                // Simpan data absen masuk
+                DB::table('absensi_dosens')->insert([
+                    'dosen_id' => $user->id,
+                    'jadwal_mengajar_id' => $jadwal->jadwal_mengajar_id,
+                    'jam_masuk' => $currentTime,
+                    'status' => true,
+                    'created_at' => $created_at,
+                    'updated_at' => $created_at,
+                ]);
+
+                return response()->json([
+                    'status' => 'success', 
+                    'message' => $nama . ' berhasil absen masuk'
+                ]);
+            }
+        } elseif ($user->role == 'mahasiswa') {
+            // Cek jadwal mahasiswa
+            // $jadwalMahasiswa = DB::table('jadwal_mahasiswas as jm')
+            //                     ->join('jadwal_mahasiswa_items as jmi', 'jm.id', '=', 'jmi.jadwal_mahasiswa_id')
+            //                     ->join('jams as j', 'jmi.jam_id', '=', 'j.id')
+            //                     ->where('jm.hari', $currentDay)
+            //                     ->where('jm.mahasiswa_id', $user->id)
+            //                     ->whereTime('j.jam_mulai', '<=', $currentTime)
+            //                     ->whereTime('j.jam_selesai', '>=', $currentTime)
+            //                     ->select('jm.id as jadwal_mengajar_id', 'j.jam_mulai', 'j.jam_selesai')
+            //                     ->first();
+
+            $jadwalMahasiswa = DB::table('jadwal_mahasiswas as jma')
+                                    ->join('jadwal_mahasiswa_items as jmai', 'jma.id', '=', 'jmai.jadwal_mahasiswa_id')
+                                    ->join('jadwal_mengajars as jm', 'jmai.jadwal_mengajar_id', '=', 'jm.id')
+                                    ->join('jadwal_mengajar_items as jmi', 'jm.id', '=', 'jmi.jadwal_mengajar_id')
+                                    ->join('jams as j', 'jmi.jam_id', '=', 'j.id')
+                                    ->where('jm.hari', $currentDay)
+                                    ->where('jma.mahasiswa_id', $user->id)
+                                    ->whereTime('j.jam_mulai', '<=', $currentTime)
+                                    ->whereTime('j.jam_selesai', '>=', $currentTime)
+                                    ->select('jm.id as jadwal_mengajar_id', 'j.jam_mulai', 'j.jam_selesai', 'jm.dosen_id')
+                                    ->first();
+                                    // return response()->json($jadwalMahasiswa);
+
+            if (!$jadwalMahasiswa) {
+                return response()->json([
+                    'status' => 'error', 
+                    'message' => 'Tidak ada jadwal'
                 ], 400);
             }
 
-            // Simpan data absen
-            $absen = new Absensi();
-            $absen->user_id = $user->id;
-            $absen->jadwal_mengajar_item_id = $jadwal->jadwal_mengajar_item_id;
-            $absen->jam_masuk = $currentTime;
-            $absen->status = true;
-            $absen->created_at = $created_at;
-            $absen->updated_at = $created_at;
-            $absen->save();
+            // Cek apakah dosen sudah absen
+            $dosenSudahAbsen = DB::table('absensi_dosens')
+                                ->where('dosen_id', $jadwalMahasiswa->dosen_id)
+                                ->where('jadwal_mengajar_id', $jadwalMahasiswa->jadwal_mengajar_id)
+                                ->whereDate('created_at', Carbon::now('Asia/Jakarta')->format('Y-m-d'))
+                                ->exists();
+                                // return response()->json($dosenSudahAbsen);
 
-            // Pesan berhasil absen untuk Arduino
-            return response()->json([
-                'status' => 'success', 
-                'message' => $nama . ' berhasil absen'
-            ]);
-        } elseif ($user->role == 'mahasiswa') {
-            $nama = $user->name;
-            return response()->json([
-                'status' => 'success', 
-                'message' => 'Mahasiswa ' . $nama
-            ]);
+            if (!$dosenSudahAbsen) {
+                return response()->json([
+                    'status' => 'error', 
+                    'message' => 'Dosen belum absen, silakan coba lagi nanti'
+                ], 400);
+            }
+
+            // Cek apakah mahasiswa sudah absen masuk
+            $absen = DB::table('absensi_mahasiswas')
+                        ->where('mahasiswa_id', $user->id)
+                        ->where('jadwal_mengajar_id', $jadwalMahasiswa->jadwal_mengajar_id)
+                        ->whereDate('created_at', Carbon::now('Asia/Jakarta')->format('Y-m-d'))
+                        ->first();
+
+            if ($absen && $absen->jam_masuk && !$absen->jam_keluar) {
+                // Jika sudah absen masuk, lakukan absen keluar
+                DB::table('absensi_mahasiswas')
+                    ->where('id', $absen->id)
+                    ->update(['jam_keluar' => $currentTime]);
+
+                return response()->json([
+                    'status' => 'success', 
+                    'message' => 'Mahasiswa ' . $nama . ' berhasil absen keluar'
+                ]);
+            } elseif ($absen && $absen->jam_masuk && $absen->jam_keluar) {
+                return response()->json([
+                    'status' => 'error', 
+                    'message' => 'Anda sudah absen keluar'
+                ], 400);
+            } else {
+                // Simpan data absen masuk
+                DB::table('absensi_mahasiswas')->insert([
+                    'mahasiswa_id' => $user->id,
+                    'jadwal_mengajar_id' => $jadwalMahasiswa->jadwal_mengajar_id,
+                    'jam_masuk' => $currentTime,
+                    'status' => true,
+                    'created_at' => $created_at,
+                    'updated_at' => $created_at,
+                ]);
+
+                return response()->json([
+                    'status' => 'success', 
+                    'message' => 'Mahasiswa ' . $nama . ' berhasil absen masuk'
+                ]);
+            }
         }
     }
 }
-

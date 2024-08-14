@@ -61,4 +61,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(JadwalMahasiswa::class, 'mahasiswa_id', 'id');
     }
+
+    public function absensi_dosen()
+    {
+        return $this->hasMany(AbsensiDosen::class, 'dosen_id', 'id');
+    }
+
+    public function absensi_mahasiswa()
+    {
+        return $this->hasMany(AbsensiMahasiswa::class, 'mahasiswa_id', 'id');
+    }
 }

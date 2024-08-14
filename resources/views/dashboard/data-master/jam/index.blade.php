@@ -68,12 +68,10 @@
                             Jam Selesai : {{$item->jam_selesai}}
                         </td>
                         <td>
-                            <a class="btn btn-primary btn-sm" 
-                                href="{{url('/data-master/jam/edit/'.$item->id)}}">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                Edit
-                            </a> 
+                            <a class="btn btn-info btn-sm" 
+                                data-toggle="modal" data-target="#modal-edit-{{$item->id}}">
+                                <i class="fas fa-pencil-alt"></i> Edit
+                            </a>
                             &nbsp;
                             <a class="btn btn-danger btn-sm ondelete"
                                 href="{{url('/data-master/jam/delete/'.$item->id)}}"> 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class JadwalMahasiswaItemController extends Controller
+class AbsensiMahasiswaController extends Controller
 {
     //
 }

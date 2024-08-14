@@ -9,15 +9,6 @@
          </p>
       </a>
    </li>
-   <li class="nav-item">
-      <a href="{{url('/absensi')}}"
-         class="nav-link {{Request::segment(1) == 'absensi' ? 'active' : ''}}">
-         <i class="fas fa-home"></i>
-         <p> &nbsp;
-            Absensi Dosen
-         </p>
-      </a>
-   </li>
    <li class="nav-item {{Request::segment(1) == 'data-master' ? 'menu-open' : ''}}">
       <a href="#" class="nav-link {{Request::segment(1) == 'data-master' ? 'active' : ''}}">
          <i class="nav-icon fas fa-cash-register"></i>
@@ -78,6 +69,23 @@
             </a>
          </li>
       </ul>
+   </li>
+
+   <li class="nav-item">
+      <a href="{{ url('/absensi/dosen') }}"
+         class="nav-link {{ Request::segment(1) == 'absensi' && Request::segment(2) == 'dosen' ? 'active' : '' }}">
+         <i class="fas fa-calendar-check"></i>
+         <p>&nbsp; Absensi Dosen</p>
+      </a>
+   </li>
+   <li class="nav-item">
+      <a href="{{url('/absensi/mahasiswa')}}"
+         class="nav-link {{Request::segment(1) == '' ? 'active' : ''}}">
+         <i class="fas fa-calendar-check"></i>
+         <p> &nbsp;
+            Absensi Mahasiswa
+         </p>
+      </a>
    </li>
 </ul>
 

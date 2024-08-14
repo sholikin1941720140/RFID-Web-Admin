@@ -23,7 +23,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Absensi</li>
+                        <li class="breadcrumb-item active">Absensi Dosen</li>
                     </ol>
                 </div>
             </div>
@@ -37,44 +37,48 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Daftar data Absensi</h3>
+                            <h3 class="card-title">Daftar data Absensi Dosen</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Mata Kuliah - Pengajar</th>
-                                        @for ($i = 1; $i <= 12; $i++)
-                                            <th>Jam Ke {{ $i }}</th>
-                                        @endfor
+                                        <th>Dosen - Mata Kuliah</th>
+                                        @foreach($jam as $j)
+                                            <th>{{ $j->nama }}</th>
+                                        @endforeach
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($data as $dosen => $mataKuliah)
-                                        @foreach ($mataKuliah as $mk => $jadwal)
+                                    @foreach($data as $dosen => $matkulGroups)
+                                        @foreach($matkulGroups as $matkul => $groupedData)
                                             <tr>
-                                                <td>{{ $mk }} - {{ $dosen }}</td>
-                                                @for ($i = 0; $i < 12; $i++)
                                                 <td>
-                                                    @isset($jadwal[$i])
-                                                        @if ($jadwal[$i]['status'] == '1')
-                                                            <span class="badge badge-success">Hadir</span>
-                                                        @elseif ($jadwal[$i]['status'] == '0')
-                                                            <span class="badge badge-danger">Tidak Hadir</span>
-                                                        @else
-                                                            <span class="badge badge-warning">Belum Absen</span>
-                                                        @endif
-                                                    @else
-                                                        <span class="badge badge-warning">Belum Absen</span>
-                                                    @endisset
+                                                    {{ $dosen }}<br> - <br>{{ $matkul }}
                                                 </td>
-                                                @endfor
+                                                @foreach($jam as $j)
+                                                    <td>
+                                                        @php
+                                                            // Mencari data absen untuk jam ini dalam grup
+                                                            $jamData = $groupedData->firstWhere('jam_id', $j->id);
+                                                        @endphp
+                                                        @if($jamData)
+                                                            @if($jamData->jam_masuk)
+                                                                <span class="badge badge-success">Hadir</span>
+                                                            @else
+                                                                <span class="badge badge-danger">Alfa</span>
+                                                            @endif
+                                                        @else
+                                                            
+                                                        @endif
+                                                    </td>
+                                                @endforeach
                                             </tr>
                                         @endforeach
                                     @endforeach
                                 </tbody>
-                            </table>                                                                              
+                            </table>                                                                                                                                                                                                     
                         </div>
                         <!-- /.card-body -->
                     </div>

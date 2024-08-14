@@ -36,7 +36,7 @@ class JamController extends Controller
         return redirect('/data-master/jam')->with('success', 'Data berhasil ditambahkan');
     }
 
-    public function update($id)
+    public function update(Request $request,$id)
     {
         $createdAt = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
         $data = DB::table('jams')->where('id', $id)->update([
