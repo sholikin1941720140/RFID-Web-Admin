@@ -72,8 +72,6 @@
                                                     <option value="Rabu" {{ $data['hari'] == 'Rabu' ? 'selected' : '' }}>Rabu</option>
                                                     <option value="Kamis" {{ $data['hari'] == 'Kamis' ? 'selected' : '' }}>Kamis</option>
                                                     <option value="Jumat" {{ $data['hari'] == 'Jumat' ? 'selected' : '' }}>Jumat</option>
-                                                    <option value="Sabtu" {{ $data['hari'] == 'Sabtu' ? 'selected' : '' }}>Sabtu</option>
-                                                    <option value="Minggu" {{ $data['hari'] == 'Minggu' ? 'selected' : '' }}>Minggu</option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-6">

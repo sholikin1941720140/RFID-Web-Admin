@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\RfidController;
 use App\Http\Controllers\AbsensiDosenController;
+use App\Http\Controllers\AbsensiMahasiswaController;
 use App\Http\Controllers\DataMaster\JamController;
 use App\Http\Controllers\DataMaster\MataKuliahController;
 use App\Http\Controllers\JadwalMengajarController;
@@ -56,7 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/absensi/dosen', [AbsensiDosenController::class, 'index']);
 
     //absensi mahasiswa
-    Route::get('/absensi/,mahasiswa', [AbsensiMahasiswaController::class, 'index']);
+    Route::get('/absensi/mahasiswa', [AbsensiMahasiswaController::class, 'index']);
 
     Route::get('/logout', [LoginController::class, 'logout']);
 });

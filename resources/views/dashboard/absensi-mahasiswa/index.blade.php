@@ -18,12 +18,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Daftar Absensi</h1>
+                    <h1>Daftar Mahasiswa</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Absensi Dosen</li>
+                        <li class="breadcrumb-item active">Absensi Mahasiswa</li>
                     </ol>
                 </div>
             </div>
@@ -38,14 +38,14 @@
                     <div class="card">                        
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h3 class="card-title">Daftar Data Absensi Dosen - <b>{{$hariIni}}</b></h3>
-                                <form action="{{url('/absensi/dosen')}}" method="GET" class="form-inline">
+                                <h3 class="card-title">Daftar Data Absensi Mahasiswa - <b>{{$hariIni}}</b></h3>
+                                <form action="{{url('/absensi/mahasiswa')}}" method="GET" class="form-inline">
                                     <div class="form-group mb-0">
                                         <label for="tanggal" class="mr-2">Cari Berdasarkan Tanggal</label>
                                         <input type="date" class="form-control" name="tanggal" id="tanggal" value="{{$request->tanggal}}">
                                     </div>
                                     <button class="btn btn-success ml-2" type="submit"><i class="fas fa-search"></i> Filter</button>
-                                    <a href="{{url('/absensi/dosen')}}" class="btn btn-secondary ml-2"><i class="fas fa-sync"></i> Reset</a>
+                                    <a href="{{url('/absensi/mahasiswa')}}" class="btn btn-secondary ml-2"><i class="fas fa-sync"></i> Reset</a>
                                 </form>
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Dosen - Mata Kuliah</th>
+                                        <th>Mahasiswa - Mata Kuliah</th>
                                         @foreach($jam as $j)
                                             <th>{{ $j->nama }}</th>
                                         @endforeach
