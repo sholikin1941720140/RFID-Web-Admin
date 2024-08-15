@@ -34,14 +34,14 @@ class AbsensiMahasiswaController extends Controller
                     ->join('users as u', 'jm.mahasiswa_id', '=', 'u.id')
                     ->join('mata_kuliahs as mk', 'jme.mata_kuliah_id', '=', 'mk.id')
                     ->leftJoin('absensi_mahasiswas as am', function($join) use ($selectedDate) {
-                        $join->on('jmi.id', '=', 'am.jadwal_mahasiswa_id')
+                        $join->on('jm.id', '=', 'am.jadwal_mengajar_id')
                             ->whereDate('am.created_at', $selectedDate);
                     })
                     ->where('jme.hari', Carbon::parse($selectedDate)->translatedFormat('l'))
                     ->select('u.name as mahasiswa', 'mk.nama as matkul', 'jmei.jam_id', 'am.status', 'am.jam_masuk', 'am.jam_keluar')
                     ->get()
                     ->groupBy(['mahasiswa', 'matkul']);
-        return response()->json($data);
+        // return response()->json($data);
 
         // Proses data untuk menambahkan status yang tepat
         $processedData = $data->map(function ($matkulGroups) use ($selectedDate) {
@@ -62,7 +62,8 @@ class AbsensiMahasiswaController extends Controller
                 });
             });
         });
+        // return response()->json($processedData);
 
-        return view('dashboard.absensi-mahasiswa.index', compact('processedData', 'jam', 'selectedDate', 'hariIni'));
+        return view('dashboard.absensi-mahasiswa.index', compact('processedData', 'jam', 'selectedDate', 'hariIni', 'request'));
     }
 }

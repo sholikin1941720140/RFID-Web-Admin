@@ -61,11 +61,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($processedData as $dosen => $matkulGroups)
+                                    @foreach($processedData as $mahasiswa => $matkulGroups)
                                         @foreach($matkulGroups as $matkul => $groupedData)
                                             <tr>
                                                 <td>
-                                                    {{ $dosen }}<br> - <br>{{ $matkul }}
+                                                    {{ $mahasiswa }}<br> - <br>{{ $matkul }}
                                                 </td>
                                                 @foreach($jam as $j)
                                                     <td>
@@ -79,7 +79,7 @@
                                                             @elseif($jamData->status == 'Alfa')
                                                                 <span class="badge badge-danger">Alfa</span>
                                                             @else
-                                                                <span class="badge badge-warning">{{ $jamData->status }}</span>
+                                                                <span class="badge badge-warning">Belum<br>Ada<br>Absensi</span>
                                                             @endif
                                                         @else
                                                             
@@ -90,7 +90,7 @@
                                         @endforeach
                                     @endforeach
                                 </tbody>
-                            </table>                                                                                                                                                                                                                                                     
+                            </table>                                                                                                                                                                                                                                                                                 
                         </div>
                         <!-- /.card-body -->
                     </div>
