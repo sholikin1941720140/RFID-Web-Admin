@@ -51,12 +51,6 @@
                                         <div class="schedule" id="schedule-1">
                                             <input type="hidden" id="jadwal_mengajar_id" name="jadwal_mengajar_id[]" value="">
                                             <hr>
-                                            <div class="schedule-header" align="center">
-                                                <button type="button" class="btn btn-success" id="addSchecule" onclick="addScheculeOne()"> 
-                                                    <i class="fas fa-plus"></i> &nbsp; Tambah matkul
-                                                </button>
-                                            </div>
-                                            <hr>
                                             <div class="mt-3">
                                                 <div class="row">
                                                     <div class="col-md-3">
@@ -114,7 +108,11 @@
                                         </div>
                                     </div>
                                     <div class="card-footer" align="right">
-                                        <a href="{{ url('/jadwal/jadwal-mengajar') }}" class="btn btn-warning">Kembali</a>
+                                        <button type="button" class="btn btn-success" id="addSchecule" onclick="addScheculeOne()"> 
+                                            <i class="fas fa-plus"></i> &nbsp; Tambah matkul
+                                        </button>
+                                        &nbsp;&nbsp;
+                                        <a href="{{ url('/jadwal/jadwal-mahasiswa') }}" class="btn btn-warning">Kembali</a>
                                         &nbsp;&nbsp;
                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                     </div>
@@ -129,62 +127,16 @@
 @endsection
 
 @section('custom-js')
-    {{-- <script>
-        var scheduleCount = 1;
-
-        function addSchedule() {
-            scheduleCount++;
-            var scheduleDiv = `
-                <div class="row mt-3" id="schedule-${scheduleCount}">
-                    <div class="col-sm-6">
-                        
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="jam" class="col-form-label">Jam Ke-${scheduleCount}</label>
-                        <select class="form-control select2" name="jam[]" required>
-                            <option selected disabled>Pilih Jam Mulai</option>
-                            @foreach($jam as $k)
-                                <option value="{{ $k->id }}">{{ $k->nama }} ({{ $k->jam_mulai }} - {{ $k->jam_selesai }})</option>
-                            @endforeach
-                        </select>
-                        <button type="button" class="btn btn-danger mt-2" onclick="removeSchedule(${scheduleCount})">
-                            <i class="fas fa-minus"></i> Hapus
-                        </button>
-                    </div>
-                </div>`;
-            document.getElementById('additional-schedules').insertAdjacentHTML('beforeend', scheduleDiv);
-            $('.select2').select2({
-                theme: 'bootstrap4'
-            });
-            renumberSchedules();
-        }
-
-        function removeSchedule(id) {
-            document.getElementById(`schedule-${id}`).remove();
-            renumberSchedules();
-        }
-
-        function renumberSchedules() {
-            const schedules = document.querySelectorAll('#additional-schedules .row');
-            schedules.forEach((schedule, index) => {
-                const newIndex = index + 2; // Mulai dari 2 karena jam pertama bukan hasil cloning
-                schedule.id = `schedule-${newIndex}`;
-                schedule.querySelector('label').textContent = `Jam Ke-${newIndex}`;
-                schedule.querySelector('.btn-danger').setAttribute('onclick', `removeSchedule(${newIndex})`);
-            });
-            scheduleCount = schedules.length + 1;
-        }
-
-        document.getElementById('addSchedule').addEventListener('click', addSchedule);
-    </script> --}}
-
     <script>
         var scheduleCount = 1;
     
         function removeScheduleOne($id)
         {
-            $('#'+$id).remove();
-            scheduleCount--;
+            // Schedule pertama tidak bisa dihapus
+            if ($id !== 'schedule-1') {
+                $('#'+$id).remove();
+                scheduleCount--;
+            }
         }
     
         function addScheculeOne()
@@ -268,7 +220,6 @@
                 var hari = $(this).val();
                 var matkulSelect = $(scheduleId + ' .matkul-select');
                 var jadwalMengajarIdInput = $(scheduleId + ' #jadwal_mengajar_id');
-                console.log(hari);
     
                 $.ajax({
                     url: '/get-jadwal',
@@ -278,9 +229,7 @@
                         _token: '{{ csrf_token() }}'
                     },
                     cache: false,
-    
                     success: function(response) {
-                        console.log(response);
                         matkulSelect.empty();
                         matkulSelect.append('<option selected disabled>Pilih Mata Kuliah</option>');
                         

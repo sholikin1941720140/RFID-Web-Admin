@@ -58,7 +58,7 @@ class JadwalMahasiswaController extends Controller
 
     public function store(Request $request)
     {
-        // return response()->json($request->all());
+        return response()->json($request->all());
         if(!$request->hari)
         {
             return redirect()->back()->with('error', 'Jadwal Mengajar tidak boleh kosong');
@@ -85,6 +85,87 @@ class JadwalMahasiswaController extends Controller
         }
 
         return redirect('/jadwal/jadwal-mahasiswa')->with('success', 'Data berhasil disimpan');
+    }
+
+    public function edit($id)
+    {
+        // Mendapatkan data mahasiswa dan jadwal yang terkait
+        $data = DB::table('jadwal_mahasiswas as jm')
+                    ->join('users as u', 'jm.mahasiswa_id', '=', 'u.id')
+                    ->select('jm.*', 'u.name as mahasiswa', 'u.nomor as nim')
+                    ->where('jm.id', $id)
+                    ->first();
+        // return response()->json($data);
+    
+        // Mendapatkan data jadwal mahasiswa
+        $items = DB::table('jadwal_mahasiswa_items as jmi')
+                    ->where('jmi.jadwal_mahasiswa_id', $id)
+                    ->join('jadwal_mengajars as jm', 'jmi.jadwal_mengajar_id', '=', 'jm.id')
+                    ->join('users as u', 'jm.dosen_id', '=', 'u.id')
+                    ->join('mata_kuliahs as mk', 'jm.mata_kuliah_id', '=', 'mk.id')
+                    ->join('jadwal_mengajar_items as jmi_item', 'jmi_item.jadwal_mengajar_id', '=', 'jm.id')
+                    ->join('jams as jam', 'jmi_item.jam_id', '=', 'jam.id')
+                    ->select('jm.id as jadwal_mengajar_id', 'jm.hari', 'u.name as dosen', 'mk.nama as matkul', 'mk.kode', 'mk.tahun', 'jam.nama as jam_nama', 'jam.jam_mulai', 'jam.jam_selesai')
+                    ->get();
+        // return response()->json($items);
+    
+        // Group by hari dan matkul
+        $groupedByHari = [];
+        foreach ($items as $item) {
+            $groupedByHari[$item->hari][$item->jadwal_mengajar_id] = [
+                'matkul' => $item->matkul,
+                'dosen' => $item->dosen,
+                'jam' => [
+                    'jam_nama' => $item->jam_nama,
+                    'jam_mulai' => $item->jam_mulai,
+                    'jam_selesai' => $item->jam_selesai,
+                ],
+                'tahun' => $item->tahun,
+            ];
+        }
+        // return response()->json($groupedByHari);
+    
+        // Menyimpan data yang sudah diolah ke dalam objek $data
+        $data->jadwal = $groupedByHari;
+        // return response()->json($data);
+    
+        $mahasiswa = DB::table('users')
+                        ->where('role', 'mahasiswa')
+                        ->get();
+    
+        // Mengembalikan view dengan data yang dibutuhkan
+        return view('dashboard.jadwal-mahasiswa.edit', compact('data', 'mahasiswa'));
+    }    
+
+    public function update(Request $request)
+    {
+        // return response()->json($request->all());
+        if(!$request->hari)
+        {
+            return redirect()->back()->with('error', 'Jadwal Mengajar tidak boleh kosong');
+        }
+        if(!$request->mahasiswa)
+        {
+            return redirect()->back()->with('error', 'Mahasiswa tidak boleh kosong');
+        }
+
+        $created_at = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
+        DB::table('jadwal_mahasiswas')->where('id', $request->id)->update([
+            'mahasiswa_id' => $request->mahasiswa,
+            'updated_at' => $created_at,
+        ]);
+        DB::table('jadwal_mahasiswa_items')->where('jadwal_mahasiswa_id', $request->id)->delete();
+        foreach($request->jadwal_mengajar_id as $key => $value)
+        {
+            DB::table('jadwal_mahasiswa_items')->insert([
+                'jadwal_mahasiswa_id' => $request->id,
+                'jadwal_mengajar_id' => $request->jadwal_mengajar_id[$key],
+                'created_at' => $created_at,
+                'updated_at' => $created_at,
+            ]);
+        }
+
+        return redirect('/jadwal/jadwal-mahasiswa')->with('success', 'Data berhasil diubah');
     }
 
     public function delete($id)

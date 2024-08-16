@@ -39,7 +39,7 @@
          </li>
       </ul>
    </li>
-   
+
    <li class="nav-item {{Request::segment(1) == 'jadwal' ? 'menu-open' : ''}}">
       <a href="#" class="nav-link {{Request::segment(1) == 'jadwal' ? 'active' : ''}}">
          <i class="nav-icon  fas fa-check"></i>
@@ -80,7 +80,7 @@
    </li>
    <li class="nav-item">
       <a href="{{url('/absensi/mahasiswa')}}"
-         class="nav-link {{Request::segment(1) == '' ? 'active' : ''}}">
+         class="nav-link {{Request::segment(1) == 'absensi' && Request::segment(2) == 'mahasiswa' ? 'active' : ''}}">
          <i class="fas fa-calendar-check"></i>
          <p> &nbsp;
             Absensi Mahasiswa
