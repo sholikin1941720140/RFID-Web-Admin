@@ -15,9 +15,6 @@ class ApiController extends Controller
     public function getApiData()
     {
         $client = new Client();
-        $url = 'https://api.polinema.ac.id/siakad/presensi/jadwal/format/json?nim=2241720066&thnsem=20221';
-        $user = 'ktm';
-        $password = 'ktMp0LiNema#';
 
         try {
             // Mengirimkan request dengan autentikasi basic
