@@ -79,7 +79,7 @@
                             </a>
                             &nbsp;
                             <a class="btn btn-danger btn-sm ondelete"
-                                href="{{url('/data-master/jam/delete/'.$item->id)}}"> 
+                                href="{{url('/user/delete/'.$item->id)}}"> 
                                 <i class="fas fa-trash"></i>
                                 Delete
                             </a>

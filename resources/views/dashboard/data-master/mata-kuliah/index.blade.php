@@ -34,10 +34,10 @@
         <div class="container-fluid">
         <div class="row mb-2 d-flex justify-content-end mr-auto">
             <div class="ml-auto">
-            {{-- <a href="{{url('/arsip-surat/create')}}" class="btn btn-success">
-                <i class="fas fa-plus"></i>
-                Tambah Data
-            </a> --}}
+                <a style="cursor: pointer;" type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-create">
+                    <i class="fas fa-plus"></i>
+                    Tambah Data
+                </a>
             </div>
         </div>
         <div class="row">
@@ -55,45 +55,28 @@
                         <th>Nama</th>
                         <th>kode</th>
                         <th>Tahun Semester</th>
-                        {{-- <th>Semester</th> --}}
-                        {{-- <th>Aksi</th> --}}
+                        <th>Aksi</th>
                     </tr>
                     </thead>
                     @foreach($data as $key => $item)
+                    @include('dashboard.data-master.mata-kuliah.modal-edit')
                     <tr>
                         <td>{{$key+1}}</td>
                         <td>{{$item->nama}}</td>
                         <td>{{$item->kode}}</td>
                         <td>{{$item->tahun}}</td>
-                        {{-- <td>{{$item->semester}}</td> --}}
-                        {{-- <td>
+                        <td>
                             <a class="btn btn-primary btn-sm" 
-                                href="{{url('/kategori/edit/'.$item->id)}}">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                Edit
-                            </a> 
-                            &nbsp;
-                            <a class="btn btn-primary btn-sm" 
-                                href="{{url('/arsip-surat/show/'.$item->id)}}">
-                                <i class="fas fa-eye">
-                                </i>
-                                Lihat
-                            </a>
-                            &nbsp;
-                            <a class="btn btn-warning btn-sm" 
-                                href="{{url('/arsip-surat/download/'.$item->id)}}">
-                                <i class="fas fa-download">
-                                </i>
-                                Download
+                                data-toggle="modal" data-target="#modal-edit-{{$item->id}}">
+                                <i class="fas fa-pencil-alt"></i> Edit
                             </a>
                             &nbsp;
                             <a class="btn btn-danger btn-sm ondelete"
-                                href="{{url('/kategori/delete/'.$item->id)}}"> 
+                                href="{{url('/data-master/matkul/delete/'.$item->id)}}"> 
                                 <i class="fas fa-trash"></i>
                                 Delete
                             </a>
-                        </td> --}}
+                        </td>
                     </tr>
                     @endforeach
                 </table>
@@ -106,6 +89,7 @@
         </div>
         <!-- /.row -->
         </div>
+        @include('dashboard.data-master.mata-kuliah.modal-create')
     </section>
     <!-- /.content -->
 </div>

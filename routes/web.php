@@ -49,6 +49,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/data-master/jam/delete/{id}', [JamController::class, 'delete']);
 
     Route::get('/data-master/matkul', [MataKuliahController::class, 'index']);
+    Route::post('/data-master/matkul/store', [MataKuliahController::class, 'store']);
+    Route::post('/data-master/matkul/update/{id}', [MataKuliahController::class, 'update']);
+    Route::get('/data-master/matkul/delete/{id}', [MataKuliahController::class, 'delete']);
 
     //data jadwal mengajar dosen
     Route::get('/jadwal/jadwal-mengajar', [JadwalMengajarController::class, 'index']);

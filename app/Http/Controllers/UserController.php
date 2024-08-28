@@ -64,4 +64,11 @@ class UserController extends Controller
 
         return redirect('/user')->with('success', 'Data user berhasil diubah!');
     }
+
+    public function delete($id)
+    {
+        DB::table('users')->where('id', $id)->delete();
+
+        return redirect('/user')->with('success', 'Data user berhasil dihapus!');
+    }
 }
