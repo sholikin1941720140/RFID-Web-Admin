@@ -68,7 +68,7 @@
                             Jam Selesai : {{$item->jam_selesai}}
                         </td>
                         <td>
-                            <a class="btn btn-info btn-sm" 
+                            <a class="btn btn-primary btn-sm" 
                                 data-toggle="modal" data-target="#modal-edit-{{$item->id}}">
                                 <i class="fas fa-pencil-alt"></i> Edit
                             </a>

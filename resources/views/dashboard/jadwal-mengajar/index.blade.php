@@ -38,6 +38,7 @@
                 <i class="fas fa-plus"></i>
                 Tambah Data
             </a>
+            <a href="{{url('/get-jadwal')}}" class="btn btn-primary ml-2"><i class="fas fa-sync"></i> Get All Jadwal</a>
             </div>
         </div>
         <div class="row">

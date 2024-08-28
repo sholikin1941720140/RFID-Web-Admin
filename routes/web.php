@@ -33,6 +33,9 @@ Route::middleware('auth')->group(function () {
     //get-api
     Route::get('/get-api', [ApiController::class, 'getApiData']);
 
+    //get-jadwal
+    Route::get('/get-jadwal', [ApiController::class, 'getJadwal']);
+
     //user
     Route::get('/user', [UserController::class, 'index']);
     Route::post('/user/store', [UserController::class, 'store']);

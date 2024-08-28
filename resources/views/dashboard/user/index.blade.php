@@ -39,7 +39,7 @@
                     Tambah Data
                 </a>
             </div>
-            <a href="{{url('/absensi/mahasiswa')}}" class="btn btn-primary ml-2"><i class="fas fa-sync"></i> Get API User</a>
+            <a href="{{url('/get-api')}}" class="btn btn-primary ml-2"><i class="fas fa-sync"></i> Get API User</a>
         </div>
         <div class="row">
             <div class="col-12">
@@ -73,7 +73,7 @@
                         <td>{{$item->uid}}</td>
                         <td>{{$item->username}}</td>
                         <td>
-                            <a class="btn btn-info btn-sm" 
+                            <a class="btn btn-primary btn-sm" 
                                 data-toggle="modal" data-target="#modal-edit-{{$item->id}}">
                                 <i class="fas fa-pencil-alt"></i> Edit
                             </a>
