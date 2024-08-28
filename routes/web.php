@@ -9,6 +9,8 @@ use App\Http\Controllers\DataMaster\JamController;
 use App\Http\Controllers\DataMaster\MataKuliahController;
 use App\Http\Controllers\JadwalMengajarController;
 use App\Http\Controllers\JadwalMahasiswaController;
+use App\Http\Controllers\ApiController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,15 @@ Route::get('/rfid-data', [RfidController::class, 'store']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [LoginController::class, 'dashboard']);
+
+    //get-api
+    Route::get('/get-api', [ApiController::class, 'getApiData']);
+
+    //user
+    Route::get('/user', [UserController::class, 'index']);
+    Route::post('/user/store', [UserController::class, 'store']);
+    Route::post('/user/update/{id}', [UserController::class, 'update']);
+    Route::get('/user/delete/{id}', [UserController::class, 'delete']);
 
     //data master jam
     Route::get('/data-master/jam', [JamController::class, 'index']);

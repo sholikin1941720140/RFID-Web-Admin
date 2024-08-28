@@ -87,6 +87,16 @@
          </p>
       </a>
    </li>
+
+   <li class="nav-item">
+      <a href="{{url('/user')}}"
+         class="nav-link {{Request::segment(1) == 'user' ? 'active' : ''}}">
+         <i class="fas fa-user-plus"></i>
+         <p> &nbsp;
+            User
+         </p>
+      </a>
+   </li>
 </ul>
 
 <style>

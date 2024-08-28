@@ -24,33 +24,33 @@ class UserSeeder extends Seeder
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make('admin123')
             ],
-            [
-                'role' => 'dosen',
-                'uid' => '73D41334',
-                'nomor' => '123456789',
-                'username' => 'dosen',
-                'name' => 'Ahmadi Yuli Ananta, ST., M.M.',
-                'email' => 'ahmadi@gmail.com',
-                'password' => Hash::make('password')
-            ],
-            [
-                'role' => 'dosen',
-                'uid' => null,
-                'nomor' => '123456788',
-                'username' => 'dosen',
-                'name' => 'Vivi Nur Wijayaningrum, S.Kom., M.Kom.',
-                'email' => 'vivi@gmail.com',
-                'password' => Hash::make('password')
-            ],
-            [
-                'role' => 'mahasiswa',
-                'uid' => '5F73572B',
-                'nomor' => '1941720240',
-                'username' => 'ngabdul',
-                'name' => 'Ngabdul',
-                'email' => 'ngabdul123@gmail.com',
-                'password' => Hash::make('password')
-            ]
+            // [
+            //     'role' => 'dosen',
+            //     'uid' => '73D41334',
+            //     'nomor' => '123456789',
+            //     'username' => 'dosen',
+            //     'name' => 'Ahmadi Yuli Ananta, ST., M.M.',
+            //     'email' => 'ahmadi@gmail.com',
+            //     'password' => Hash::make('password')
+            // ],
+            // [
+            //     'role' => 'dosen',
+            //     'uid' => null,
+            //     'nomor' => '123456788',
+            //     'username' => 'dosen',
+            //     'name' => 'Vivi Nur Wijayaningrum, S.Kom., M.Kom.',
+            //     'email' => 'vivi@gmail.com',
+            //     'password' => Hash::make('password')
+            // ],
+            // [
+            //     'role' => 'mahasiswa',
+            //     'uid' => '5F73572B',
+            //     'nomor' => '1941720240',
+            //     'username' => 'ngabdul',
+            //     'name' => 'Ngabdul',
+            //     'email' => 'ngabdul123@gmail.com',
+            //     'password' => Hash::make('password')
+            // ]
         ]);
         
     }
