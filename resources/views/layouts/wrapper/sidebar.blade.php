@@ -14,9 +14,9 @@
       <div class="image" style="opacity: 0">
       User:
       </div>
-      <div class="info">
+      <div class="info d-flex flex-column" style="white-space: normal;">
         <a href="/dashboard" class="d-block">
-            <b>{{ Auth::user()->name }}</b>
+          <b>{{ Auth::user()->name }}</b>
         </a>
       </div>
     </div>

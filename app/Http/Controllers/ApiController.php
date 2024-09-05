@@ -14,6 +14,7 @@ class ApiController extends Controller
 {
     public function getApiData()
     {
+        
         $client = new Client();
 
         try {
@@ -26,6 +27,9 @@ class ApiController extends Controller
             // Mengambil isi body dari response dalam bentuk array
             $data = json_decode($response->getBody()->getContents(), true);
 
+            //debugging data API mentah
+            // return response()->json($data);
+
             $checkdulu = DB::table('check_apis')->get();
             // return response()->json($checkdulu);
             if($checkdulu->isEmpty()){
@@ -34,7 +38,14 @@ class ApiController extends Controller
                     $nim = $data['data'][0]['nim'];
                     $nama = $data['data'][0]['nama'];
                     $dosenList = collect($data['data'])->pluck('dosen')->unique()->take(2)->values()->all();
-    
+
+                    //debugging data yang diambl dari API
+                    // return response()->json([
+                    //     'nim' => $nim,
+                    //     'nama' => $nama,
+                    //     'dosen' => $dosenList,
+                    // ]);
+
                     // Memasukkan mahasiswa ke database users
                     $userMahasiswa = User::create([
                         'role' => 'mahasiswa',
@@ -49,9 +60,12 @@ class ApiController extends Controller
                     // Memasukkan dosen ke database users
                     foreach ($dosenList as $index => $dosen) {
                         $namaDepan = explode(' ', $dosen)[0];
+                        // Tentukan UID berdasarkan indeks dosen
+                        $uidDosen = $index === 0 ? '73D41334' : 'A37A3814';
+
                         $userDosen = User::create([
                             'role' => 'dosen',
-                            'uid' => '73D4133' . ($index + 4), // UID yang berbeda untuk setiap dosen
+                            'uid' => $uidDosen, // Gunakan UID yang sudah ditentukan
                             'nomor' => null,
                             'username' => 'dosen' . ($index + 1), // Pastikan 'username' dimasukkan
                             'name' => $dosen,

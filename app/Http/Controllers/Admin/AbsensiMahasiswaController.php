@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use DB;
@@ -34,7 +34,7 @@ class AbsensiMahasiswaController extends Controller
                     ->join('users as u', 'jm.mahasiswa_id', '=', 'u.id')
                     ->join('mata_kuliahs as mk', 'jme.mata_kuliah_id', '=', 'mk.id')
                     ->leftJoin('absensi_mahasiswas as am', function($join) use ($selectedDate) {
-                        $join->on('jm.id', '=', 'am.jadwal_mengajar_id')
+                        $join->on('jme.id', '=', 'am.jadwal_mengajar_id')
                             ->whereDate('am.created_at', $selectedDate);
                     })
                     ->where('jme.hari', Carbon::parse($selectedDate)->translatedFormat('l'))

@@ -3,14 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\RfidController;
-use App\Http\Controllers\AbsensiDosenController;
-use App\Http\Controllers\AbsensiMahasiswaController;
+use App\Http\Controllers\Admin\AbsensiDosenController;
+use App\Http\Controllers\Admin\AbsensiMahasiswaController;
 use App\Http\Controllers\DataMaster\JamController;
 use App\Http\Controllers\DataMaster\MataKuliahController;
-use App\Http\Controllers\JadwalMengajarController;
-use App\Http\Controllers\JadwalMahasiswaController;
+use App\Http\Controllers\Admin\JadwalMengajarController;
+use App\Http\Controllers\Admin\JadwalMahasiswaController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Dosen\JadwalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,9 @@ Route::middleware('auth')->group(function () {
 
     //absensi mahasiswa
     Route::get('/absensi/mahasiswa', [AbsensiMahasiswaController::class, 'index']);
+
+    //dosen
+    Route::get('/dosen-jadwal', [JadwalController::class, 'index']);
 
     Route::get('/logout', [LoginController::class, 'logout']);
 });

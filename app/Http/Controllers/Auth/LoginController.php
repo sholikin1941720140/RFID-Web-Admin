@@ -18,6 +18,7 @@ class LoginController extends Controller
     {
         $dsn = DB::table('users')->where('role', 'dosen')->count();
         $mhs = DB::table('users')->where('role', 'mahasiswa')->count();
+
         return view('dashboard.dashboard', compact('dsn', 'mhs'));
     }
 
