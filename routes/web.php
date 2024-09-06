@@ -11,7 +11,8 @@ use App\Http\Controllers\Admin\JadwalMengajarController;
 use App\Http\Controllers\Admin\JadwalMahasiswaController;
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\Dosen\JadwalController;
+use App\Http\Controllers\Dosen\JadwalDsnController;
+use App\Http\Controllers\Mahasiswa\JadwalMhsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,7 +79,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/absensi/mahasiswa', [AbsensiMahasiswaController::class, 'index']);
 
     //dosen
-    Route::get('/dosen-jadwal', [JadwalController::class, 'index']);
+    Route::get('/dosen-jadwal', [JadwalDsnController::class, 'index']);
+
+    //mahasiswa
+    Route::get('/mahasiswa-jadwal', [JadwalMhsController::class, 'index']);
 
     Route::get('/logout', [LoginController::class, 'logout']);
 });

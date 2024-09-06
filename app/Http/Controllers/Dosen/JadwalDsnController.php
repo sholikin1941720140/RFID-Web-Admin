@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use Auth;
 
-class JadwalController extends Controller
+class JadwalDsnController extends Controller
 {
     public function index()
     {
@@ -18,8 +18,8 @@ class JadwalController extends Controller
                     ->join('jams as j', 'jmi.jam_id', '=', 'j.id')
                     ->where('jm.dosen_id', $auth->id)
                     ->select('jm.id', 'jm.hari', 'mk.nama as mata_kuliah', 'j.nama as jam_ke', 'j.jam_mulai', 'j.jam_selesai')
-                    ->orderBy('jm.hari')
-                    ->orderBy('j.jam_mulai')
+                    // ->orderBy('jm.hari')
+                    // ->orderBy('j.jam_mulai')
                     ->get();
         // return response()->json($data);
         

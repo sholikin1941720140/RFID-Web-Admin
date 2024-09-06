@@ -10,8 +10,8 @@
       </a>
    </li>
    <li class="nav-item">
-      <a href="{{url('/dashboard')}}"
-         class="nav-link {{Request::segment(1) == 'dashboard' ? 'active' : ''}}">
+      <a href="{{url('/mahasiswa-jadwal')}}"
+         class="nav-link {{Request::segment(1) == 'mahasiswa-jadwal' ? 'active' : ''}}">
          <i class="fas fa-check"></i>
          <p> &nbsp;
             Jadwal
