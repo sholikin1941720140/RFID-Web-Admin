@@ -19,8 +19,8 @@
       </a>
    </li>
    <li class="nav-item">
-      <a href="{{url('/dashboard')}}"
-         class="nav-link {{Request::segment(1) == 'dashboard' ? 'active' : ''}}">
+      <a href="{{url('/mahasiswa-absen')}}"
+         class="nav-link {{Request::segment(1) == 'mahasiswa-absen' ? 'active' : ''}}">
          <i class="fas fa-calendar-check"></i>
          <p> &nbsp;
             Absensi
