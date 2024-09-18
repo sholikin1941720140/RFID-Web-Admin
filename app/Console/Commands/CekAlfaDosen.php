@@ -8,18 +8,7 @@ use DB;
 
 class CekAlfaDosen extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'cek:alfa-dosen';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Cek dosen yang tidak hadir pada jadwal mereka dan berikan status alfa';
 
     public function __construct()
@@ -71,7 +60,7 @@ class CekAlfaDosen extends Command
 
                 $this->info('Dosen dengan Nama ' . $nama . ' diberikan status Alfa.');
             } else {
-                $this->info('Dosen dengan Nama ' . $nama . ' sudah melakukan absensi.');
+                $this->info('Dosen dengan Nama ' . $nama . ' telah diperiksa.');
             }
         }
 
