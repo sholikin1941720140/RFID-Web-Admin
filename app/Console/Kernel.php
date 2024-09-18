@@ -7,12 +7,19 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
+    protected $commands = [
+        Commands\CekAlfaDosen::class,
+        Commands\CekAlfaMahasiswa::class,
+    ];
+
     /**
      * Define the application's command schedule.
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        // Menjalankan command cek alfa dosen dan mahasiswa setiap hari jam 23:59
+        $schedule->command('cek:alfa-dosen')->dailyAt('23:59');
+        $schedule->command('cek:alfa-mahasiswa')->dailyAt('23:59');
     }
 
     /**

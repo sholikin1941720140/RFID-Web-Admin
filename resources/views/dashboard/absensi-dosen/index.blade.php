@@ -74,15 +74,18 @@
                                                         @endphp
                                                         
                                                         @if($jamData)
-                                                            @if($jamData->status == 'Hadir')
-                                                                <span class="badge badge-success">Hadir</span>
-                                                            @elseif($jamData->status == 'Alfa')
+                                                            {{-- Status Kosong --}}
+                                                            @if($jamData->status === 0)
+                                                                {{-- Kosong tidak perlu badge --}}
+                                                            @elseif($jamData->status === 'Alfa')
                                                                 <span class="badge badge-danger">Alfa</span>
-                                                            @else
+                                                            @elseif($jamData->status === 'Hadir')
+                                                                <span class="badge badge-success">Hadir</span>
+                                                            @elseif($jamData->status === 'Belum Ada Absensi')
                                                                 <span class="badge badge-warning">Belum<br>Ada<br>Absensi</span>
                                                             @endif
                                                         @else
-                                                            
+                                                            {{-- Tidak ada data --}}
                                                         @endif
                                                     </td>
                                                 @endforeach

@@ -14,7 +14,9 @@ class ApiController extends Controller
 {
     public function getApiData()
     {
-        
+        $url = 'https://api.polinema.ac.id/siakad/presensi/jadwal/format/json?nim=2241720066&thnsem=20221';
+        $user = 'ktm';
+        $password = 'ktMp0LiNema#';
         $client = new Client();
 
         try {
@@ -100,10 +102,8 @@ class ApiController extends Controller
     
         if ($checkApi && $checkApi->is_success == 1) {
             if (!$checkJadwal || $checkJadwal->is_success == 0) {
-                // Ambil semua dosen dengan role 'dosen'
                 $dosens = DB::table('users')->where('role', 'dosen')->pluck('id');
-    
-                // Data sesuai dengan contoh SQL yang diberikan
+
                 $jadwalMengajarsData = [
                     ['mata_kuliah_id' => 1, 'hari' => 'Senin'],
                     ['mata_kuliah_id' => 2, 'hari' => 'Selasa'],
@@ -116,26 +116,22 @@ class ApiController extends Controller
                 ];
     
                 $jadwalMengajarItemsData = [
-                    [9, 10, 11, 12],  // Jam untuk mata kuliah 1 pada Senin
-                    [7, 8, 9, 10, 11, 12],  // Jam untuk mata kuliah 2 pada Selasa
-                    [8, 9, 10, 11],  // Jam untuk mata kuliah 3 pada Rabu
-                    [2, 3, 4, 5],  // Jam untuk mata kuliah 8 pada Rabu
-                    [1, 2, 3, 4],  // Jam untuk mata kuliah 5 pada Kamis
-                    [7, 8],  // Jam untuk mata kuliah 6 pada Kamis
-                    [1, 2, 3, 4, 5, 6],  // Jam untuk mata kuliah 2 pada Jumat
-                    [9, 10, 11, 12],  // Jam untuk mata kuliah 7 pada Jumat
+                    [9, 10, 11, 12],  
+                    [7, 8, 9, 10, 11, 12],  
+                    [8, 9, 10, 11],  
+                    [2, 3, 4, 5],  
+                    [1, 2, 3, 4],  
+                    [7, 8],  
+                    [1, 2, 3, 4, 5, 6],  
+                    [9, 10, 11, 12],  
                 ];
     
                 $created_at = Carbon::now('Asia/Jakarta')->format('Y-m-d H:i:s');
-                // Array untuk menyimpan ID dari jadwal_mengajars
                 $jadwalMengajarIds = [];
     
-                // Looping untuk setiap jadwal mengajar yang sudah ditentukan
                 foreach ($jadwalMengajarsData as $index => $jadwalData) {
-                    // Pilih dosen secara acak
                     $dosenId = $dosens->random();
     
-                    // Insert ke dalam jadwal_mengajars dan dapatkan ID yang baru saja dimasukkan
                     $jadwalMengajarId = DB::table('jadwal_mengajars')->insertGetId([
                         'dosen_id' => $dosenId,
                         'mata_kuliah_id' => $jadwalData['mata_kuliah_id'],

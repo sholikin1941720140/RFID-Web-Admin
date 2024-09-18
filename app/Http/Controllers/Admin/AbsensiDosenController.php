@@ -37,7 +37,7 @@ class AbsensiDosenController extends Controller
                             ->whereDate('ad.created_at', $selectedDate);
                     })
                     ->where('jm.hari', Carbon::parse($selectedDate)->translatedFormat('l'))
-                    ->select('u.name as dosen', 'mk.nama as matkul', 'jmi.jam_id', 'ad.status', 'ad.jam_masuk', 'ad.jam_keluar')
+                    ->select('u.name as dosen', 'mk.nama as matkul', 'jmi.jam_id', 'ad.status', 'ad.jam_masuk', 'ad.jam_keluar', 'ad.created_at', 'ad.updated_at')
                     ->get()
                     ->groupBy(['dosen', 'matkul']);
         // return response()->json($data);
@@ -46,21 +46,27 @@ class AbsensiDosenController extends Controller
         $processedData = $data->map(function ($matkulGroups) use ($selectedDate) {
             return $matkulGroups->map(function ($groupedData) use ($selectedDate) {
                 return $groupedData->map(function ($item) use ($selectedDate) {
-                    if (is_null($item->jam_masuk) && is_null($item->status)) {
-                        // Jika tanggal yang dipilih adalah hari ini atau masa lalu, tampilkan "Alfa"
-                        if (Carbon::parse($selectedDate)->isPast() || Carbon::parse($selectedDate)->isToday()) {
-                            $item->status = 'Alfa';
-                        } else {
-                            // Jika tanggal yang dipilih adalah masa depan, tampilkan "Belum Ada Absensi"
-                            $item->status = 'Belum Ada Absensi';
+                    // Jika tanggal yang dipilih adalah masa depan dan bukan hari Sabtu atau Minggu
+                    if (Carbon::parse($selectedDate)->isFuture() && !in_array(Carbon::parse($selectedDate)->dayOfWeek, [Carbon::SATURDAY, Carbon::SUNDAY])) {
+                        $item->status = 'Belum Ada Absensi';
+                    }
+                    // Jika created_at dan updated_at null, tampilkan kosong
+                    elseif (is_null($item->created_at) && is_null($item->updated_at)) {
+                        $item->status = 0;
+                    } 
+                    // Jika created_at dan updated_at ada, cek status
+                    elseif (!is_null($item->created_at) && !is_null($item->updated_at)) {
+                        if ($item->status == 0) {
+                            $item->status = 'Alfa'; // Jika status 0, maka tampilkan Alfa
+                        } elseif ($item->status == 1) {
+                            $item->status = 'Hadir'; // Jika status 1, maka tampilkan Hadir
                         }
-                    } elseif (!is_null($item->jam_masuk)) {
-                        $item->status = 'Hadir';
                     }
                     return $item;
                 });
             });
         });
+        
         // return response()->json($processedData);
         // Kembalikan data ke view
         return view('dashboard.absensi-dosen.index', compact('processedData', 'jam', 'hariIni', 'request', 'selectedDate'));
