@@ -18,7 +18,7 @@ class DosenController extends Controller
                     ->join('mata_kuliahs as mk', 'jm.mata_kuliah_id', '=', 'mk.id')
                     ->join('jams as j', 'jmi.jam_id', '=', 'j.id')
                     ->where('jm.dosen_id', $auth->id)
-                    ->select('jm.id', 'jm.hari', 'mk.nama as mata_kuliah', 'j.nama as jam_ke', 'j.jam_mulai', 'j.jam_selesai')
+                    ->select('jm.id', 'jm.hari', 'mk.nama as mata_kuliah', 'mk.kode', 'mk.tahun', 'j.nama as jam_ke', 'j.jam_mulai', 'j.jam_selesai')
                     // ->orderBy('jm.hari')
                     // ->orderBy('j.jam_mulai')
                     ->get();
@@ -38,6 +38,8 @@ class DosenController extends Controller
                 $groupedData[$hari][$mataKuliah] = [
                     'id' => $item->id,
                     'mata_kuliah' => $mataKuliah,
+                    'kode' => $item->kode,
+                    'tahun' => $item->tahun,
                     'jam' => []
                 ];
             }
@@ -73,7 +75,7 @@ class DosenController extends Controller
                     ->join('mata_kuliahs as mk', 'jm.mata_kuliah_id', '=', 'mk.id')
                     ->where('jm.dosen_id', $auth->id)
                     ->whereDate('ad.created_at', $selectedDate)
-                    ->select('ad.id', 'us.name as dosen', 'mk.nama as mata_kuliah', 'jm.hari', 'ad.status', 'ad.jam_masuk', 'ad.jam_keluar', 'ad.created_at')
+                    ->select('ad.id', 'us.name as dosen', 'mk.nama as mata_kuliah', 'mk.kode', 'mk.tahun', 'jm.hari', 'ad.status', 'ad.jam_masuk', 'ad.jam_keluar', 'ad.created_at')
                     ->get();
         // return response()->json($data);
 

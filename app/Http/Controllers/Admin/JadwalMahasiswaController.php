@@ -26,7 +26,7 @@ class JadwalMahasiswaController extends Controller
                     ->join('jams as jam', 'jmi_item.jam_id', '=', 'jam.id')
                     ->select('jm.hari', 'u.name as dosen', 'mk.nama as matkul', 'mk.kode', 'mk.tahun', 'jam.nama as jam_nama', 'jam.jam_mulai', 'jam.jam_selesai')
                     ->get();
-
+        // return response()->json($items);
         // Group by hari
         $groupedByHari = [];
         foreach ($items as $item) {
@@ -35,6 +35,8 @@ class JadwalMahasiswaController extends Controller
                 'jam_nama' => $item->jam_nama,
                 'jam_mulai' => $item->jam_mulai,
                 'jam_selesai' => $item->jam_selesai,
+                'kode' => $item->kode,
+                'tahun' => $item->tahun
             ];
         }
 

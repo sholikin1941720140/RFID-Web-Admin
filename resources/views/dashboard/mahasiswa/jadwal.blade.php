@@ -58,10 +58,16 @@
                                         <td>
                                             <!-- Looping mata kuliah dan jam pada hari yang sama -->
                                             @foreach($mataKuliahs as $mataKuliah => $details)
-                                                <p><b>{{ $mataKuliah }}</b> - <i>{{ $details['dosen'] }}</i></p>
+                                                <b>{{ $mataKuliah }}</b> - <i>{{ $details['dosen'] }}</i>
+                                                <br>
+                                                <b>Kode : </b> {{$details['kode']}}
+                                                <br>
+                                                <b>Tahun : </b> {{$details['tahun']}}
+                                                <p>
                                                 @foreach($details['jam'] as $jam)
                                                     <p>{{ $jam['jam_nama'] }}: {{ $jam['jam_mulai'] }} - {{ $jam['jam_selesai'] }}</p>
                                                 @endforeach
+                                                </p>
                                             @endforeach
                                         </td>
                                     </tr>

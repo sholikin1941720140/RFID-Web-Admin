@@ -43,6 +43,8 @@ class MahasiswaController extends Controller
                 if (!isset($groupedByHari[$item->hari][$item->matkul])) {
                     $groupedByHari[$item->hari][$item->matkul] = [
                         'dosen' => $item->dosen,
+                        'kode' => $item->kode,
+                        'tahun' => $item->tahun,
                         'jam' => []
                     ];
                 }
@@ -84,7 +86,7 @@ class MahasiswaController extends Controller
                     ->join('mata_kuliahs as mk', 'jme.mata_kuliah_id', '=', 'mk.id')
                     ->where('am.mahasiswa_id', $auth->id)
                     ->whereDate('am.created_at', $selectedDate)
-                    ->select('am.id', 'us.name as mahasiswa', 'mk.nama as mata_kuliah', 'jme.hari', 'am.status', 'am.jam_masuk', 'am.jam_keluar', 'am.created_at')
+                    ->select('am.id', 'us.name as mahasiswa', 'mk.nama as mata_kuliah', 'mk.kode', 'mk.tahun', 'jme.hari', 'am.status', 'am.jam_masuk', 'am.jam_keluar', 'am.created_at')
                     ->get();
         // return response()->json($data);
 

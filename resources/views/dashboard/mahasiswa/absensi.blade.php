@@ -66,7 +66,7 @@
                                 @foreach($data as $key => $value)
                                     <td>{{$key+1}}</td>
                                     <td>{{$value->hari}}, {{ \Carbon\Carbon::parse($value->created_at)->isoFormat('DD MMMM YYYY') }}</td>
-                                    <td>{{$value->mata_kuliah}}</td>
+                                    <td>{{$value->mata_kuliah}} ({{$value->kode}} / {{$value->tahun}}) </td>
                                     <td>
                                         <b>Status : </b> @empty($value->status) - @else {{$value->status}} @endempty
                                         <br>

@@ -37,7 +37,7 @@ class AbsensiDosenController extends Controller
                             ->whereDate('ad.created_at', $selectedDate);
                     })
                     ->where('jm.hari', Carbon::parse($selectedDate)->translatedFormat('l'))
-                    ->select('u.name as dosen', 'mk.nama as matkul', 'jmi.jam_id', 'ad.status', 'ad.jam_masuk', 'ad.jam_keluar', 'ad.created_at', 'ad.updated_at')
+                    ->select('u.name as dosen', 'mk.nama as matkul', 'mk.kode', 'mk.tahun', 'jmi.jam_id', 'ad.status', 'ad.jam_masuk', 'ad.jam_keluar', 'ad.created_at', 'ad.updated_at')
                     ->get()
                     ->groupBy(['dosen', 'matkul']);
         // return response()->json($data);

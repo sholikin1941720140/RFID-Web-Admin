@@ -39,7 +39,7 @@ class AbsensiMahasiswaController extends Controller
                             ->whereDate('am.created_at', $selectedDate);
                     })
                     ->where('jme.hari', Carbon::parse($selectedDate)->translatedFormat('l'))
-                    ->select('u.name as mahasiswa', 'mk.nama as matkul', 'jmei.jam_id', 'am.status', 'am.jam_masuk', 'am.jam_keluar', 'am.created_at', 'am.updated_at')
+                    ->select('u.name as mahasiswa', 'mk.nama as matkul', 'mk.kode', 'mk.tahun', 'jmei.jam_id', 'am.status', 'am.jam_masuk', 'am.jam_keluar', 'am.created_at', 'am.updated_at')
                     ->get()
                     ->groupBy(['mahasiswa', 'matkul']);
     

@@ -56,7 +56,7 @@
                                     <td>{{ $hari }}</td>
                                     <td>
                                         @foreach($mataKuliahs as $mataKuliah => $details)
-                                            <p><b>{{ $mataKuliah }}</b></p>
+                                            <p><b>{{ $mataKuliah }} ({{ $details['kode'] }} / {{ $details['tahun'] }})</b></p>
                                             @foreach($details['jam'] as $jam)
                                                 <p>{{ $jam['jam_ke'] }} : {{ $jam['jam_mulai'] }} - {{ $jam['jam_selesai'] }}</p>
                                             @endforeach

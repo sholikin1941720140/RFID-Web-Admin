@@ -66,7 +66,7 @@
                                     @foreach($item->jadwal as $hari => $matkuls)
                                         <b>Hari: {{ $hari }}</b><br>
                                         @foreach($matkuls as $matkul => $details)
-                                            <b>{{ $matkul }}</b> - <i>{{ $details[0]['dosen'] }}</i><br>
+                                            <b>{{ $matkul }} ({{$details[0]['kode']}} / {{$details[0]['tahun']}})</b> - <i>{{ $details[0]['dosen'] }}</i><br>
                                             @foreach($details as $index => $detail)
                                                 <b>{{ $detail['jam_nama'] }}: </b> {{ $detail['jam_mulai'] }} - {{ $detail['jam_selesai'] }}<br>
                                             @endforeach

@@ -65,7 +65,7 @@
                                         @foreach($matkulGroups as $matkul => $groupedData)
                                             <tr>
                                                 <td>
-                                                    {{ $mahasiswa }}<br> - <br>{{ $matkul }}
+                                                    {{ $mahasiswa }}<br> - <br>{{ $matkul }} ({{$groupedData->first()->kode}} / {{$groupedData->first()->tahun}})
                                                 </td>
                                                 @foreach($jam as $j)
                                                     <td>
