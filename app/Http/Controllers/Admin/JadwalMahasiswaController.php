@@ -58,7 +58,7 @@ class JadwalMahasiswaController extends Controller
 
     public function store(Request $request)
     {
-        return response()->json($request->all());
+        // return response()->json($request->all());
         if(!$request->hari)
         {
             return redirect()->back()->with('error', 'Jadwal Mengajar tidak boleh kosong');

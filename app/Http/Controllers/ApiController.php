@@ -14,7 +14,6 @@ class ApiController extends Controller
 {
     public function getApiData()
     {
-        
         $client = new Client();
 
         try {
