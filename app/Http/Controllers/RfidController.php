@@ -23,6 +23,7 @@ class RfidController extends Controller
             return response()->json([
                 'status' => 'error', 
                 'message' => 'UID tidak terdeteksi', 
+                'code' => 0,
                 'uid' => $uid,
                 'time' => $now
             ], 400);
@@ -33,7 +34,8 @@ class RfidController extends Controller
         if (!$user) {
             return response()->json([
                 'status' => 'error', 
-                'message' => 'Kartu belum terdaftar'
+                'message' => 'Kartu belum terdaftar',
+                'code' => 1
             ], 404);
         }
     
@@ -60,7 +62,8 @@ class RfidController extends Controller
             if (!$jadwal) {
                 return response()->json([
                     'status' => 'error', 
-                    'message' => 'Tidak ada jadwal'
+                    'message' => 'Tidak ada jadwal',
+                    'code' => 2
                 ], 400);
             }
 
@@ -79,12 +82,14 @@ class RfidController extends Controller
 
                 return response()->json([
                     'status' => 'success', 
-                    'message' => $nama . ' berhasil absen keluar'
+                    'message' => $nama . ' berhasil absen keluar',
+                    'code' => 4
                 ]);
             } elseif ($absen && $absen->jam_masuk && $absen->jam_keluar) {
                 return response()->json([
                     'status' => 'error', 
-                    'message' => 'Anda sudah absen keluar'
+                    'message' => 'Anda sudah absen keluar',
+                    'code' => 4
                 ], 400);
             } else {
                 // Simpan data absen masuk
@@ -99,21 +104,12 @@ class RfidController extends Controller
 
                 return response()->json([
                     'status' => 'success', 
-                    'message' => $nama . ' berhasil absen masuk'
+                    'message' => $nama . ' berhasil absen masuk',
+                    'code' => 3
                 ]);
             }
         } elseif ($user->role == 'mahasiswa') {
             // Cek jadwal mahasiswa
-            // $jadwalMahasiswa = DB::table('jadwal_mahasiswas as jm')
-            //                     ->join('jadwal_mahasiswa_items as jmi', 'jm.id', '=', 'jmi.jadwal_mahasiswa_id')
-            //                     ->join('jams as j', 'jmi.jam_id', '=', 'j.id')
-            //                     ->where('jm.hari', $currentDay)
-            //                     ->where('jm.mahasiswa_id', $user->id)
-            //                     ->whereTime('j.jam_mulai', '<=', $currentTime)
-            //                     ->whereTime('j.jam_selesai', '>=', $currentTime)
-            //                     ->select('jm.id as jadwal_mengajar_id', 'j.jam_mulai', 'j.jam_selesai')
-            //                     ->first();
-
             $jadwalMahasiswa = DB::table('jadwal_mahasiswas as jma')
                                     ->join('jadwal_mahasiswa_items as jmai', 'jma.id', '=', 'jmai.jadwal_mahasiswa_id')
                                     ->join('jadwal_mengajars as jm', 'jmai.jadwal_mengajar_id', '=', 'jm.id')
@@ -130,7 +126,8 @@ class RfidController extends Controller
             if (!$jadwalMahasiswa) {
                 return response()->json([
                     'status' => 'error', 
-                    'message' => 'Tidak ada jadwal'
+                    'message' => 'Tidak ada jadwal',
+                    'code' => 2
                 ], 400);
             }
 
@@ -145,7 +142,8 @@ class RfidController extends Controller
             if (!$dosenSudahAbsen) {
                 return response()->json([
                     'status' => 'error', 
-                    'message' => 'Dosen belum absen, silakan coba lagi nanti'
+                    'message' => 'Dosen belum absen, silakan coba lagi nanti',
+                    'code' => 2
                 ], 400);
             }
 
@@ -164,12 +162,14 @@ class RfidController extends Controller
 
                 return response()->json([
                     'status' => 'success', 
-                    'message' => 'Mahasiswa ' . $nama . ' berhasil absen keluar'
+                    'message' => 'Mahasiswa ' . $nama . ' berhasil absen keluar',
+                    'code' => 4
                 ]);
             } elseif ($absen && $absen->jam_masuk && $absen->jam_keluar) {
                 return response()->json([
                     'status' => 'error', 
-                    'message' => 'Anda sudah absen keluar'
+                    'message' => 'Anda sudah absen keluar',
+                    'code' => 4
                 ], 400);
             } else {
                 // Simpan data absen masuk
@@ -184,7 +184,8 @@ class RfidController extends Controller
 
                 return response()->json([
                     'status' => 'success', 
-                    'message' => 'Mahasiswa ' . $nama . ' berhasil absen masuk'
+                    'message' => 'Mahasiswa ' . $nama . ' berhasil absen masuk',
+                    'code' => 3
                 ]);
             }
         }
